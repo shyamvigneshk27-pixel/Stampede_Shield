@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StampedeShield | Crowd Compression Intelligence Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app-shell">
+
+  <!-- ═══════════════════════════════════════════
+       LEFT SIDEBAR NAVIGATION
+  ═══════════════════════════════════════════ -->
+  <nav class="sidebar" id="sidebar">
+    <!-- Brand -->
+    <div class="sidebar-brand">
+      <div class="brand-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          <polyline points="9 11 11 13 15 9"/>
+        </svg>
+      </div>
+      <div class="brand-text">
+        <span class="brand-name">StampedeShield</span>
+        <span class="brand-sub">Crowd Intelligence</span>
+      </div>
+    </div>
+
+    <!-- Navigation Items -->
+    <div class="sidebar-nav">
+      <button class="nav-item active" data-page="dashboard" title="Dashboard">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+          <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+        </svg>
+        <span class="nav-label">Dashboard</span>
+      </button>
+
+      <button class="nav-item" data-page="heatmap" title="Pressure Heatmap">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          <line x1="2" y1="12" x2="22" y2="12"/>
+        </svg>
+        <span class="nav-label">Pressure Heatmap</span>
+      </button>
+
+      <button class="nav-item" data-page="ai" title="AI Prediction Center">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+        </svg>
+        <span class="nav-label">AI Prediction</span>
+      </button>
+
+      <button class="nav-item" data-page="venue" title="Venue Map">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/>
+          <line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/>
+        </svg>
+        <span class="nav-label">Venue Map</span>
+      </button>
+
+      <button class="nav-item" data-page="incident" title="Incident Center">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+          <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+        </svg>
+        <span class="nav-label">Incident Center</span>
+        <span class="nav-badge" id="incident-badge">0</span>
+      </button>
+
+      <button class="nav-item" data-page="devices" title="Device Monitoring">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/>
+          <line x1="12" y1="17" x2="12" y2="21"/>
+        </svg>
+        <span class="nav-label">Devices</span>
+      </button>
+
+      <button class="nav-item" data-page="analytics" title="Analytics">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/>
+          <line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/>
+        </svg>
+        <span class="nav-label">Analytics</span>
+      </button>
+
+      <button class="nav-item" data-page="notifications" title="Notifications">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+          <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+        </svg>
+        <span class="nav-label">Notifications</span>
+        <span class="nav-badge alert" id="notif-badge">0</span>
+      </button>
+
+      <button class="nav-item" data-page="settings" title="Settings">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+        </svg>
+        <span class="nav-label">Settings</span>
+      </button>
+    </div>
+
+    <!-- Sidebar Footer -->
+    <div class="sidebar-footer">
+      <button class="sidebar-collapse-btn" id="sidebar-collapse-btn" title="Collapse sidebar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+      </button>
+      <div class="sidebar-status-dot" id="sidebar-status-dot" title="Offline – Simulator Active"></div>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════
+       MAIN CONTENT AREA
+  ═══════════════════════════════════════════ -->
+  <div class="main-content">
+
+    <!-- TOP BAR -->
+    <header class="top-bar">
+      <div class="topbar-left">
+        <div class="page-breadcrumb">
+          <span class="breadcrumb-section" id="breadcrumb-section">Dashboard</span>
+        </div>
+        <div class="topbar-event-info">
+          <span class="event-chip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Demo Venue — Hall A
+          </span>
+          <span class="status-chip offline">
+            <span class="chip-dot"></span>
+            Offline Processing
+          </span>
+          <span class="status-chip connected" id="connection-indicator">
+            <span class="chip-dot"></span>
+            <span class="status-label">Simulator Active</span>
+          </span>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <div class="topbar-clock" id="topbar-clock">00:00:00</div>
+        <div class="topbar-operator">
+          <div class="operator-avatar">OP</div>
+          <span class="operator-name">Operator 1</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- ═══════════════ PAGE ROUTER OUTLET ═══════════════ -->
+    <div class="page-outlet">
+
+      <!-- ════════════════════════════════════
+           PAGE 1: DASHBOARD
+      ════════════════════════════════════ -->
+      <section class="page active" id="page-dashboard">
+
+        <!-- KPI Hero Row -->
+        <div class="kpi-row">
+          <div class="kpi-card" id="kpi-overall-status">
+            <div class="kpi-icon kpi-icon-safe" id="kpi-status-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 11 11 13 15 9"/></svg>
+            </div>
+            <div class="kpi-body">
+              <div class="kpi-label">Overall Status</div>
+              <div class="kpi-value" id="overall-status-val">SAFE</div>
+              <div class="kpi-sub" id="overall-status-desc">Normal baseline conditions</div>
+            </div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-icon kpi-icon-neutral">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div class="kpi-body">
+              <div class="kpi-label">Compression Risk</div>
+              <div class="kpi-value kpi-risk-val" id="risk-pct-val">0%</div>
+              <div class="kpi-sub">Current Risk Score</div>
+            </div>
+            <div class="kpi-gauge-mini">
+              <svg viewBox="0 0 100 100" class="kpi-radial-gauge">
+                <circle class="kpi-gauge-bg" cx="50" cy="50" r="40"/>
+                <circle class="kpi-gauge-fill" id="risk-gauge-fill" cx="50" cy="50" r="40" stroke-dasharray="251.2" stroke-dashoffset="251.2"/>
+              </svg>
+            </div>
+          </div>
+
+          <div class="kpi-card" id="spc-status-card">
+            <div class="kpi-icon kpi-icon-safe">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div class="kpi-body">
+              <div class="kpi-label">SPC State</div>
+              <div class="kpi-value" id="spc-status-val">Stable</div>
+              <div class="kpi-sub" id="spc-status-desc">Normal variation within limits</div>
+            </div>
+            <div class="spc-indicator-dot" id="spc-indicator-pulse"></div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-icon kpi-icon-neutral">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+            </div>
+            <div class="kpi-body">
+              <div class="kpi-label">Active Sensors</div>
+              <div class="kpi-value">6 / 6</div>
+              <div class="kpi-sub">All FSR sensors online</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main Dashboard Grid -->
+        <div class="dash-grid">
+
+          <!-- LEFT: F1-F6 Sensor Heatmap Nodes -->
+          <div class="dash-panel sensor-panel">
+            <div class="panel-header">
+              <div class="panel-title-group">
+                <h2 class="panel-title">Sensor Array</h2>
+                <span class="panel-subtitle">F1–F6 FSR Pressure Grid</span>
+              </div>
+              <span class="panel-badge">2×3 Layout</span>
+            </div>
+            <div class="heatmap-grid">
+              <div class="sensor-node" id="node-f1">
+                <span class="sensor-id">F1</span>
+                <span class="sensor-location">Top Left</span>
+                <div class="sensor-value-overlay"><span id="val-f1">0</span> <span class="unit">N</span></div>
+                <div class="sensor-health-lbl" id="health-f1">Healthy</div>
+                <div class="sensor-wave-pulse"></div>
+              </div>
+              <div class="sensor-node" id="node-f2">
+                <span class="sensor-id">F2</span>
+                <span class="sensor-location">Top Center</span>
+                <div class="sensor-value-overlay"><span id="val-f2">0</span> <span class="unit">N</span></div>
+                <div class="sensor-health-lbl" id="health-f2">Healthy</div>
+                <div class="sensor-wave-pulse"></div>
+              </div>
+              <div class="sensor-node" id="node-f3">
+                <span class="sensor-id">F3</span>
+                <span class="sensor-location">Top Right</span>
+                <div class="sensor-value-overlay"><span id="val-f3">0</span> <span class="unit">N</span></div>
+                <div class="sensor-health-lbl" id="health-f3">Healthy</div>
+                <div class="sensor-wave-pulse"></div>
+              </div>
+              <div class="sensor-node" id="node-f4">
+                <span class="sensor-id">F4</span>
+                <span class="sensor-location">Bottom Left</span>
+                <div class="sensor-value-overlay"><span id="val-f4">0</span> <span class="unit">N</span></div>
+                <div class="sensor-health-lbl" id="health-f4">Healthy</div>
+                <div class="sensor-wave-pulse"></div>
+              </div>
+              <div class="sensor-node" id="node-f5">
+                <span class="sensor-id">F5</span>
+                <span class="sensor-location">Bottom Center</span>
+                <div class="sensor-value-overlay"><span id="val-f5">0</span> <span class="unit">N</span></div>
+                <div class="sensor-health-lbl" id="health-f5">Healthy</div>
+                <div class="sensor-wave-pulse"></div>
+              </div>
+              <div class="sensor-node" id="node-f6">
+                <span class="sensor-id">F6</span>
+                <span class="sensor-location">Bottom Right</span>
+                <div class="sensor-value-overlay"><span id="val-f6">0</span> <span class="unit">N</span></div>
+                <div class="sensor-health-lbl" id="health-f6">Healthy</div>
+                <div class="sensor-wave-pulse"></div>
+              </div>
+            </div>
+            <div class="heatmap-legend">
+              <div class="legend-chip"><span class="legend-dot-indicator low"></span> Low</div>
+              <div class="legend-chip"><span class="legend-dot-indicator moderate"></span> Moderate</div>
+              <div class="legend-chip"><span class="legend-dot-indicator high"></span> High</div>
+              <div class="legend-chip"><span class="legend-dot-indicator critical"></span> Critical</div>
+            </div>
+          </div>
+
+          <!-- RIGHT: Status + Gauge + SPC + Presets -->
+          <div class="dash-right-col">
+
+            <!-- Overall Status Card (hidden duplicate for app.js compat) -->
+            <div style="display:none" id="overall-status-card" class="status-card safe">
+              <div id="overall-status-icon"></div>
+            </div>
+
+            <!-- Crowd Risk Assessment Panel -->
+            <div class="dash-panel risk-assessment-panel">
+              <div class="panel-header">
+                <h2 class="panel-title">Risk Assessment Details</h2>
+              </div>
+              <div class="risk-assessment-details">
+                <div class="risk-detail-item">
+                  <span class="spc-stat-label">Current Risk Level</span>
+                  <span class="risk-val-status SAFE" id="risk-detail-level">SAFE</span>
+                </div>
+                <div class="risk-detail-item" style="margin-top: 0.5rem;">
+                  <span class="spc-stat-label">Assessment Reason</span>
+                  <div class="risk-text" id="risk-detail-reason">• Baseline nominal pressure distribution.</div>
+                </div>
+                <div class="risk-detail-item" style="margin-top: 0.5rem;">
+                  <span class="spc-stat-label">Recommended Action</span>
+                  <div class="risk-text text-brand" id="risk-detail-action">• Normal operations; maintain monitoring.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- State Timeline Panel -->
+            <div class="dash-panel timeline-panel">
+              <div class="panel-header">
+                <h2 class="panel-title">Status Transition Timeline</h2>
+              </div>
+              <div class="timeline-container" id="timeline-transitions" style="max-height: 120px; overflow-y: auto; display: flex; flex-direction: column; gap: 0.4rem; padding-right: 4px;">
+                <!-- Dynamically populated timeline entries -->
+              </div>
+            </div>
+
+            <!-- SPC Detail Card -->
+            <div class="dash-panel spc-detail-panel">
+              <div class="panel-header">
+                <h2 class="panel-title">SPC Statistics</h2>
+              </div>
+              <div class="spc-stats-grid">
+                <div class="spc-stat-item">
+                  <span class="spc-stat-label">Running Avg</span>
+                  <span class="spc-stat-val" id="spc-avg-val">0.0 N</span>
+                </div>
+                <div class="spc-stat-item">
+                  <span class="spc-stat-label">Std Dev (σ)</span>
+                  <span class="spc-stat-val" id="spc-sd-val">0.0 N</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Simulation Presets -->
+            <div class="dash-panel presets-panel">
+              <div class="panel-header">
+                <h2 class="panel-title">Simulation Presets</h2>
+              </div>
+              <div class="quick-presets-grid">
+                <button class="quick-preset-btn active" data-preset="normal">Normal</button>
+                <button class="quick-preset-btn" data-preset="drift">Drift</button>
+                <button class="quick-preset-btn" data-preset="panic">Panic</button>
+                <button class="quick-preset-btn" data-preset="stampede">Stampede</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Emergency Command Panel -->
+        <div class="dash-panel emergency-command-panel" style="margin-bottom: 1rem;">
+          <div class="panel-header">
+            <h2 class="panel-title" style="color: var(--brand);">🚨 Emergency Command Panel</h2>
+            <span class="panel-subtitle">Immediate operational directives</span>
+          </div>
+          <div class="command-buttons-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.8rem; margin-top: 0.75rem;">
+            <button class="action-btn-direct panic-action-btn" id="cmd-send-alert">Send Alert</button>
+            <button class="action-btn-direct info-action-btn" id="cmd-call-medical">Call Medical Team</button>
+            <button class="action-btn-direct safe-action-btn" id="cmd-open-exit">Open Exit Gates</button>
+            <button class="action-btn-direct warning-action-btn" id="cmd-close-gate">Close Entry Gate</button>
+            <button class="action-btn-direct voice-action-btn" id="cmd-voice-alert">Broadcast Voice</button>
+            <button class="action-btn-direct siren-action-btn" id="cmd-activate-siren">Activate Siren</button>
+          </div>
+        </div>
+
+        <!-- Trend Graph -->
+        <div class="dash-panel graph-panel">
+          <div class="panel-header">
+            <div class="panel-title-group">
+              <h2 class="panel-title">Live Pressure Trend</h2>
+              <span class="panel-subtitle">Rolling average with ±3σ control limits (UCL / LCL)</span>
+            </div>
+            <div class="graph-legend">
+              <div class="legend-item"><span class="legend-dot avg-line"></span> Avg Pressure</div>
+              <div class="legend-item"><span class="legend-dot limits-line"></span> Control Limits</div>
+            </div>
+          </div>
+          <div class="canvas-container">
+            <canvas id="trend-graph-canvas"></canvas>
+          </div>
+        </div>
+
+        <!-- Live Sensor Telemetry Bar Cards -->
+        <div class="dash-panel telemetry-panel">
+          <div class="panel-header">
+            <h2 class="panel-title">Live Sensor Telemetry</h2>
+          </div>
+          <div class="raw-sensors-grid">
+            <div class="raw-card" id="raw-card-f1">
+              <span class="card-id">Sensor 1 (F1)</span>
+              <div class="card-value-group"><span class="card-num" id="raw-val-f1">0</span><span class="card-unit">N</span></div>
+              <div class="bar-track"><div class="bar-fill" id="raw-bar-f1" style="width:0%"></div></div>
+            </div>
+            <div class="raw-card" id="raw-card-f2">
+              <span class="card-id">Sensor 2 (F2)</span>
+              <div class="card-value-group"><span class="card-num" id="raw-val-f2">0</span><span class="card-unit">N</span></div>
+              <div class="bar-track"><div class="bar-fill" id="raw-bar-f2" style="width:0%"></div></div>
+            </div>
+            <div class="raw-card" id="raw-card-f3">
+              <span class="card-id">Sensor 3 (F3)</span>
+              <div class="card-value-group"><span class="card-num" id="raw-val-f3">0</span><span class="card-unit">N</span></div>
+              <div class="bar-track"><div class="bar-fill" id="raw-bar-f3" style="width:0%"></div></div>
+            </div>
+            <div class="raw-card" id="raw-card-f4">
+              <span class="card-id">Sensor 4 (F4)</span>
+              <div class="card-value-group"><span class="card-num" id="raw-val-f4">0</span><span class="card-unit">N</span></div>
+              <div class="bar-track"><div class="bar-fill" id="raw-bar-f4" style="width:0%"></div></div>
+            </div>
+            <div class="raw-card" id="raw-card-f5">
+              <span class="card-id">Sensor 5 (F5)</span>
+              <div class="card-value-group"><span class="card-num" id="raw-val-f5">0</span><span class="card-unit">N</span></div>
+              <div class="bar-track"><div class="bar-fill" id="raw-bar-f5" style="width:0%"></div></div>
+            </div>
+            <div class="raw-card" id="raw-card-f6">
+              <span class="card-id">Sensor 6 (F6)</span>
+              <div class="card-value-group"><span class="card-num" id="raw-val-f6">0</span><span class="card-unit">N</span></div>
+              <div class="bar-track"><div class="bar-fill" id="raw-bar-f6" style="width:0%"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Crowd Compression Heatmap -->
+        <div class="dash-panel heatmap-canvas-panel">
+          <div class="panel-header">
+            <div class="panel-title-group">
+              <h2 class="panel-title">Overall Crowd Compression Heat Map</h2>
+              <span class="panel-subtitle">Continuous bilinear interpolation across F1–F6 sensors</span>
+            </div>
+            <div class="heatmap-canvas-legend">
+              <div class="canvas-legend-chip"><span class="canvas-legend-swatch safe"></span> Safe</div>
+              <div class="canvas-legend-chip"><span class="canvas-legend-swatch warning"></span> Warning</div>
+              <div class="canvas-legend-chip"><span class="canvas-legend-swatch high"></span> High Alert</div>
+              <div class="canvas-legend-chip"><span class="canvas-legend-swatch critical"></span> Critical</div>
+            </div>
+          </div>
+          <div class="canvas-heatmap-wrapper">
+            <canvas id="crowd-heatmap-canvas"></canvas>
+            <div class="heatmap-label" style="top:25%;left:16.67%">F1</div>
+            <div class="heatmap-label" style="top:25%;left:50%">F2</div>
+            <div class="heatmap-label" style="top:25%;left:83.33%">F3</div>
+            <div class="heatmap-label" style="top:75%;left:16.67%">F4</div>
+            <div class="heatmap-label" style="top:75%;left:50%">F5</div>
+            <div class="heatmap-label" style="top:75%;left:83.33%">F6</div>
+          </div>
+        </div>
+
+        <!-- System Diagnostics Footer -->
+        <div class="dash-panel diagnostics-panel">
+          <div class="diagnostics-row">
+            <div class="diagnostic-item"><span class="label">Baud Rate</span><span class="val">9600 bps</span></div>
+            <div class="diagnostic-item"><span class="label">Connection Mode</span><span class="val" id="diag-conn-mode">Simulator</span></div>
+            <div class="diagnostic-item"><span class="label">Sample Frequency</span><span class="val" id="diag-freq">0 Hz</span></div>
+            <div class="diagnostic-item"><span class="label">Telemetry Count</span><span class="val" id="diag-count">0</span></div>
+            <div class="diagnostic-item"><span class="label">Last Frame</span><span class="val" id="diag-time">-- : -- : --</span></div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ════════════════════════════════════
+           PAGE 2: PRESSURE HEATMAP
+      ════════════════════════════════════ -->
+      <section class="page" id="page-heatmap">
+        <div class="page-header-bar">
+          <h1 class="page-h1">Pressure Heatmap</h1>
+          <p class="page-desc">Full-resolution thermal visualization of mat pressure distribution</p>
+        </div>
+
+        <div class="heatmap-page-grid">
+          <!-- Large Canvas -->
+          <div class="dash-panel heatmap-full-panel">
+            <div class="panel-header">
+              <div class="panel-title-group">
+                <h2 class="panel-title">Thermal Pressure Map</h2>
+                <span class="panel-subtitle">Bilinear interpolation — updates on every sensor reading</span>
+              </div>
+              <div class="heatmap-canvas-legend">
+                <div class="canvas-legend-chip"><span class="canvas-legend-swatch safe"></span> Safe (0–200N)</div>
+                <div class="canvas-legend-chip"><span class="canvas-legend-swatch warning"></span> Warning (200–450N)</div>
+                <div class="canvas-legend-chip"><span class="canvas-legend-swatch high"></span> High (450–700N)</div>
+                <div class="canvas-legend-chip"><span class="canvas-legend-swatch critical"></span> Critical (700+N)</div>
+              </div>
+            </div>
+            <div class="canvas-heatmap-wrapper heatmap-large">
+              <canvas id="heatmap-page-canvas"></canvas>
+              <div class="heatmap-label" style="top:25%;left:16.67%">F1</div>
+              <div class="heatmap-label" style="top:25%;left:50%">F2</div>
+              <div class="heatmap-label" style="top:25%;left:83.33%">F3</div>
+              <div class="heatmap-label" style="top:75%;left:16.67%">F4</div>
+              <div class="heatmap-label" style="top:75%;left:50%">F5</div>
+              <div class="heatmap-label" style="top:75%;left:83.33%">F6</div>
+            </div>
+          </div>
+
+          <!-- Sidebar Values -->
+          <div class="heatmap-sidebar">
+            <div class="dash-panel">
+              <div class="panel-header"><h2 class="panel-title">Live Values</h2></div>
+              <div class="heatmap-live-values" id="heatmap-live-values">
+                <div class="hlv-row"><span>F1 — Top Left</span><span class="hlv-val" id="hm-val-f1">0 N</span></div>
+                <div class="hlv-row"><span>F2 — Top Center</span><span class="hlv-val" id="hm-val-f2">0 N</span></div>
+                <div class="hlv-row"><span>F3 — Top Right</span><span class="hlv-val" id="hm-val-f3">0 N</span></div>
+                <div class="hlv-row"><span>F4 — Bottom Left</span><span class="hlv-val" id="hm-val-f4">0 N</span></div>
+                <div class="hlv-row"><span>F5 — Bottom Center</span><span class="hlv-val" id="hm-val-f5">0 N</span></div>
+                <div class="hlv-row"><span>F6 — Bottom Right</span><span class="hlv-val" id="hm-val-f6">0 N</span></div>
+              </div>
+            </div>
+            <div class="dash-panel">
+              <div class="panel-header"><h2 class="panel-title">Statistics</h2></div>
+              <div class="heatmap-live-values">
+                <div class="hlv-row"><span>Peak Pressure</span><span class="hlv-val" id="hm-peak">0 N</span></div>
+                <div class="hlv-row"><span>Average</span><span class="hlv-val" id="hm-avg">0 N</span></div>
+                <div class="hlv-row"><span>Hot Zone</span><span class="hlv-val" id="hm-hotzone">—</span></div>
+                <div class="hlv-row"><span>Risk Level</span><span class="hlv-val" id="hm-risk">Low</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════════════════════════════════
+           PAGE 3: AI PREDICTION CENTER
+      ════════════════════════════════════ -->
+      <section class="page" id="page-ai">
+        <div class="page-header-bar">
+          <h1 class="page-h1">AI Prediction Center</h1>
+          <p class="page-desc">SPC-driven risk intelligence &amp; crowd compression forecasting</p>
+        </div>
+
+        <div class="ai-grid">
+          <!-- Large Risk Gauge -->
+          <div class="dash-panel ai-gauge-panel">
+            <div class="panel-header"><h2 class="panel-title">Crowd Risk Score</h2></div>
+            <div class="ai-gauge-container">
+              <svg class="ai-radial-gauge" viewBox="0 0 200 200">
+                <circle class="ai-gauge-bg" cx="100" cy="100" r="80"/>
+                <circle class="ai-gauge-fill" id="ai-gauge-fill" cx="100" cy="100" r="80" stroke-dasharray="502.4" stroke-dashoffset="502.4"/>
+              </svg>
+              <div class="ai-gauge-center">
+                <div class="ai-gauge-pct" id="ai-risk-pct">0%</div>
+                <div class="ai-gauge-label">RISK SCORE</div>
+              </div>
+            </div>
+            <div class="ai-gauge-status" id="ai-status-label">System Stable</div>
+          </div>
+
+          <!-- Prediction Metrics -->
+          <div class="ai-metrics-col">
+            <div class="dash-panel ai-metric-card">
+              <div class="ai-metric-icon ai-icon-time">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
+              <div>
+                <div class="ai-metric-label">Time to Critical (est.)</div>
+                <div class="ai-metric-value" id="ai-time-critical">—</div>
+              </div>
+            </div>
+
+            <div class="dash-panel ai-metric-card">
+              <div class="ai-metric-icon ai-icon-confidence">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              </div>
+              <div>
+                <div class="ai-metric-label">Prediction Confidence</div>
+                <div class="ai-metric-value" id="ai-confidence">—</div>
+              </div>
+            </div>
+
+            <div class="dash-panel ai-metric-card">
+              <div class="ai-metric-icon ai-icon-growth">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+              </div>
+              <div>
+                <div class="ai-metric-label">Pressure Growth Rate</div>
+                <div class="ai-metric-value" id="ai-growth-rate">Stable</div>
+              </div>
+            </div>
+
+            <div class="dash-panel ai-metric-card">
+              <div class="ai-metric-icon ai-icon-action">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </div>
+              <div>
+                <div class="ai-metric-label">Recommended Action</div>
+                <div class="ai-metric-value ai-action" id="ai-action">Monitor</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SPC Detail Panel -->
+          <div class="dash-panel ai-spc-panel">
+            <div class="panel-header"><h2 class="panel-title">SPC Control Parameters</h2></div>
+            <div class="ai-spc-stats">
+              <div class="ai-spc-row"><span>Process State</span><span class="ai-spc-val" id="ai-spc-state">Stable</span></div>
+              <div class="ai-spc-row"><span>Running Average</span><span class="ai-spc-val" id="ai-spc-avg">0.0 N</span></div>
+              <div class="ai-spc-row"><span>Std Deviation (σ)</span><span class="ai-spc-val" id="ai-spc-sd">0.0 N</span></div>
+              <div class="ai-spc-row"><span>UCL (+3σ)</span><span class="ai-spc-val" id="ai-spc-ucl">—</span></div>
+              <div class="ai-spc-row"><span>LCL (-3σ)</span><span class="ai-spc-val" id="ai-spc-lcl">—</span></div>
+              <div class="ai-spc-row"><span>Risk Score</span><span class="ai-spc-val" id="ai-spc-risk">0%</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- AI Trend Mini Graph -->
+        <div class="dash-panel ai-trend-panel">
+          <div class="panel-header">
+            <h2 class="panel-title">Pressure Trend History</h2>
+            <div class="graph-legend">
+              <div class="legend-item"><span class="legend-dot avg-line"></span> Avg Pressure</div>
+              <div class="legend-item"><span class="legend-dot limits-line"></span> Control Limits</div>
+            </div>
+          </div>
+          <div class="canvas-container ai-canvas-container">
+            <canvas id="ai-trend-canvas"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════════════════════════════════
+           PAGE 4: VENUE MAP
+      ════════════════════════════════════ -->
+      <section class="page" id="page-venue">
+        <div class="page-header-bar">
+          <h1 class="page-h1">Venue Map</h1>
+          <p class="page-desc">Real-time pressure overlay on venue floor plan</p>
+        </div>
+        <div class="venue-grid">
+          <div class="dash-panel venue-map-panel">
+            <div class="panel-header"><h2 class="panel-title">Demo Venue — Hall A</h2></div>
+            <div class="venue-map-container">
+              <!-- Schematic floor plan -->
+              <div class="venue-floor">
+                <!-- Zones -->
+                <div class="venue-zone safe-zone" style="top:10%;left:10%;width:30%;height:35%" id="venue-gate-a">
+                  <span class="zone-label">Entry Gate A</span>
+                </div>
+                <div class="venue-zone safe-zone" style="top:10%;left:60%;width:30%;height:35%" id="venue-gate-b">
+                  <span class="zone-label">Entry Gate B</span>
+                </div>
+                <div class="venue-zone neutral-zone" style="top:55%;left:10%;width:80%;height:35%" id="venue-monitored-zone">
+                  <span class="zone-label">Main Floor — Monitored Area</span>
+                </div>
+
+                <!-- Operational Teams & Barricades -->
+                <div class="marshal-dot medical" style="top:48%;left:12%;background:#1D4ED8;color:white;font-size:0.6rem;padding:2px 4px;border-radius:4px;width:auto;height:auto;" title="Medical Team Alpha">🚑 Med A</div>
+                <div class="marshal-dot security" style="top:48%;left:82%;background:#166534;color:white;font-size:0.6rem;padding:2px 4px;border-radius:4px;width:auto;height:auto;" title="Security Team Bravo">👮 Sec B</div>
+                <div class="marshal-dot barricade" style="top:50%;left:48%;background:#B91C1C;color:white;font-size:0.6rem;padding:2px 4px;border-radius:2px;width:auto;height:auto;" title="Crowd Barricade">🚧 Barrier</div>
+
+                <!-- Evacuation directions text indicator overlay -->
+                <div id="evacuation-indicator-banner" style="position: absolute; top: 38%; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.85); color: #fff; padding: 4px 10px; border-radius: 4px; font-size: 0.72rem; font-weight: 700; border: 1.5px solid var(--brand); display: none; z-index: 5;">
+                  ⚠ Evacuation Direction: Seek East Exits
+                </div>
+
+                <!-- FSR Sensor positions overlay -->
+                <div class="sensor-dot" style="top:60%;left:20%" id="map-f1">F1</div>
+                <div class="sensor-dot" style="top:60%;left:50%" id="map-f2">F2</div>
+                <div class="sensor-dot" style="top:60%;left:80%" id="map-f3">F3</div>
+                <div class="sensor-dot" style="top:80%;left:20%" id="map-f4">F4</div>
+                <div class="sensor-dot" style="top:80%;left:50%" id="map-f5">F5</div>
+                <div class="sensor-dot" style="top:80%;left:80%" id="map-f6">F6</div>
+
+                <!-- Marshal positions -->
+                <div class="marshal-dot" style="top:12%;left:45%">M1</div>
+                <div class="marshal-dot" style="top:58%;left:5%">M2</div>
+                <div class="marshal-dot" style="top:58%;left:92%">M3</div>
+
+                <!-- Exit signs -->
+                <div class="exit-sign" style="bottom:3%;left:20%">EXIT</div>
+                <div class="exit-sign" style="bottom:3%;left:75%">EXIT</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="venue-sidebar">
+            <div class="dash-panel">
+              <div class="panel-header"><h2 class="panel-title">Zone Legend</h2></div>
+              <div class="venue-legend">
+                <div class="vl-row"><span class="vl-dot" style="background:#39FF1440;border:2px solid #39FF14"></span> Safe Zone</div>
+                <div class="vl-row"><span class="vl-dot" style="background:#FF000030;border:2px solid #FF0000"></span> Danger Zone</div>
+                <div class="vl-row"><span class="vl-dot sensor-dot-small"></span> FSR Sensor</div>
+                <div class="vl-row"><span class="vl-dot marshal-dot-small"></span> Marshal</div>
+              </div>
+            </div>
+            <div class="dash-panel">
+              <div class="panel-header"><h2 class="panel-title">Sensor Status</h2></div>
+              <div class="heatmap-live-values">
+                <div class="hlv-row"><span>F1</span><span class="hlv-val" id="venue-f1">0 N</span></div>
+                <div class="hlv-row"><span>F2</span><span class="hlv-val" id="venue-f2">0 N</span></div>
+                <div class="hlv-row"><span>F3</span><span class="hlv-val" id="venue-f3">0 N</span></div>
+                <div class="hlv-row"><span>F4</span><span class="hlv-val" id="venue-f4">0 N</span></div>
+                <div class="hlv-row"><span>F5</span><span class="hlv-val" id="venue-f5">0 N</span></div>
+                <div class="hlv-row"><span>F6</span><span class="hlv-val" id="venue-f6">0 N</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════════════════════════════════
+           PAGE 5: INCIDENT CENTER
+      ════════════════════════════════════ -->
+      <section class="page" id="page-incident">
+        <div class="page-header-bar">
+          <h1 class="page-h1">Incident Center</h1>
+          <p class="page-desc">Live incident timeline and alert management</p>
+        </div>
+        <div class="incident-grid">
+          <div class="dash-panel incident-timeline-panel">
+            <div class="panel-header">
+              <h2 class="panel-title">Incident Timeline</h2>
+              <button class="panel-action-btn" id="btn-clear-incidents">Clear All</button>
+            </div>
+            <div class="incident-timeline" id="incident-timeline">
+              <div class="incident-empty">No incidents recorded. System is monitoring.</div>
+            </div>
+          </div>
+          <div class="incident-sidebar">
+            <div class="dash-panel">
+              <div class="panel-header"><h2 class="panel-title">Active Alerts</h2></div>
+              <div class="active-alerts" id="active-alerts">
+                <div class="alert-empty">System nominal</div>
+              </div>
+            </div>
+            <div class="dash-panel">
+              <div class="panel-header"><h2 class="panel-title">Summary</h2></div>
+              <div class="heatmap-live-values">
+                <div class="hlv-row"><span>Total Incidents</span><span class="hlv-val" id="inc-total">0</span></div>
+                <div class="hlv-row"><span>Critical</span><span class="hlv-val" id="inc-critical">0</span></div>
+                <div class="hlv-row"><span>Warnings</span><span class="hlv-val" id="inc-warnings">0</span></div>
+                <div class="hlv-row"><span>Resolved</span><span class="hlv-val" id="inc-resolved">0</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════════════════════════════════
+           PAGE 6: DEVICE MONITORING
+      ════════════════════════════════════ -->
+      <section class="page" id="page-devices">
+        <div class="page-header-bar">
+          <h1 class="page-h1">Device Monitoring</h1>
+          <p class="page-desc">Real-time hardware health and connectivity status</p>
+        </div>
+        <div class="devices-grid">
+          <div class="device-card dash-panel">
+            <div class="device-card-icon device-arduino"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+            <div class="device-card-body">
+              <div class="device-name">Arduino Nano</div>
+              <div class="device-status online" id="dev-arduino-status">Connected</div>
+              <div class="device-meta">6 FSR sensors · 10Hz sampling</div>
+            </div>
+            <div class="device-health-bar"><div class="device-health-fill" id="dev-arduino-health" style="width:95%"></div></div>
+          </div>
+
+          <div class="device-card dash-panel">
+            <div class="device-card-icon device-bt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6.5 6.5 17.5 17.5"/><polyline points="17.5 6.5 6.5 17.5"/><path d="M12 2L12 22"/><path d="M19 9L12 16L5 9"/><path d="M5 15L12 8L19 15"/></svg></div>
+            <div class="device-card-body">
+              <div class="device-name">Bluetooth Module</div>
+              <div class="device-status" id="dev-bt-status">Simulator Mode</div>
+              <div class="device-meta" id="dev-bt-meta">BLE / HC-05 · 9600 bps</div>
+            </div>
+            <div class="device-health-bar"><div class="device-health-fill" id="dev-bt-health" style="width:80%"></div></div>
+          </div>
+
+          <div class="device-card dash-panel">
+            <div class="device-card-icon device-cpu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg></div>
+            <div class="device-card-body">
+              <div class="device-name">Processing Unit</div>
+              <div class="device-status online">Active</div>
+              <div class="device-meta">SPC Engine · Offline AI Inference</div>
+            </div>
+            <div class="device-health-bar"><div class="device-health-fill online-fill" style="width:72%"></div></div>
+          </div>
+
+          <div class="device-card dash-panel">
+            <div class="device-card-icon device-sensor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg></div>
+            <div class="device-card-body">
+              <div class="device-name">FSR Sensor Array</div>
+              <div class="device-status online">6/6 Active</div>
+              <div class="device-meta">Pressure range: 0–1023 N</div>
+            </div>
+            <div class="device-health-bar"><div class="device-health-fill online-fill" style="width:100%"></div></div>
+          </div>
+        </div>
+
+        <!-- Telemetry Stats -->
+        <div class="dash-panel">
+          <div class="panel-header"><h2 class="panel-title">Hardware Diagnostics &amp; Connection Status</h2></div>
+          <div class="diagnostics-row" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; border-bottom: none;">
+            <div class="diagnostic-item"><span class="label">Arduino Link</span><span class="val" id="dev-arduino-status-diag">Connected</span></div>
+            <div class="diagnostic-item"><span class="label">COM Port</span><span class="val" id="dev-com-port">Auto</span></div>
+            <div class="diagnostic-item"><span class="label">Sampling Rate</span><span class="val" id="dev-freq-diag">10 Hz</span></div>
+            <div class="diagnostic-item"><span class="label">Latency</span><span class="val" id="dev-latency">4 ms</span></div>
+            <div class="diagnostic-item"><span class="label">Packet Loss</span><span class="val" id="dev-loss">0.0%</span></div>
+            <div class="diagnostic-item"><span class="label">Calibration</span><span class="val" id="dev-calibration">Default (1.0x)</span></div>
+            <div class="diagnostic-item"><span class="label">Last Packet</span><span class="val" id="dev-time-diag">—</span></div>
+          </div>
+        </div>
+
+        <!-- Connected Client Manager -->
+        <div class="dash-panel" style="margin-top: 1rem;">
+          <div class="panel-header">
+            <h2 class="panel-title">Connected Clients Manager</h2>
+            <span class="panel-subtitle">Live connections over Wi-Fi Hotspot (8080)</span>
+          </div>
+          <div class="clients-list-container" style="margin-top: 0.8rem; overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.85rem;">
+              <thead>
+                <tr style="border-bottom: 2px solid var(--border-light); color: var(--text-secondary); font-weight: 600;">
+                  <th style="padding: 0.5rem;">Device Name / ID</th>
+                  <th style="padding: 0.5rem;">Type</th>
+                  <th style="padding: 0.5rem;">Status</th>
+                </tr>
+              </thead>
+              <tbody id="clients-list-tbody">
+                <tr>
+                  <td colspan="3" style="padding: 1rem; text-align: center; color: var(--text-tertiary);">No clients connected.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════════════════════════════════
+           PAGE 7: ANALYTICS
+      ════════════════════════════════════ -->
+      <section class="page" id="page-analytics">
+        <div class="page-header-bar">
+          <h1 class="page-h1">Analytics</h1>
+          <p class="page-desc">Historical pressure analysis and SPC statistics</p>
+          <button class="panel-action-btn" id="btn-export-csv">Export CSV</button>
+        </div>
+        <div class="analytics-grid">
+          <div class="dash-panel">
+            <div class="panel-header"><h2 class="panel-title">Pressure Statistics</h2></div>
+            <div class="analytics-stats">
+              <div class="analytic-stat"><span class="as-label">Peak Pressure</span><span class="as-val" id="an-peak">0 N</span></div>
+              <div class="analytic-stat"><span class="as-label">Average</span><span class="as-val" id="an-avg">0 N</span></div>
+              <div class="analytic-stat"><span class="as-label">Std Deviation</span><span class="as-val" id="an-sd">0 N</span></div>
+              <div class="analytic-stat"><span class="as-label">Min Pressure</span><span class="as-val" id="an-min">0 N</span></div>
+              <div class="analytic-stat"><span class="as-label">Total Samples</span><span class="as-val" id="an-samples">0</span></div>
+              <div class="analytic-stat"><span class="as-label">Critical Events</span><span class="as-val" id="an-critical">0</span></div>
+            </div>
+          </div>
+
+          <div class="dash-panel an-graph-panel">
+            <div class="panel-header">
+              <h2 class="panel-title">Pressure History</h2>
+            </div>
+            <div class="canvas-container">
+              <canvas id="analytics-canvas"></canvas>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════════════════════════════════
+           PAGE 8: NOTIFICATIONS
+      ════════════════════════════════════ -->
+      <section class="page" id="page-notifications">
+        <div class="page-header-bar">
+          <h1 class="page-h1">Notifications</h1>
+          <p class="page-desc">System alerts and event log</p>
+        </div>
+        <div class="notif-filter-tabs">
+          <button class="notif-tab active" data-filter="all">All</button>
+          <button class="notif-tab" data-filter="emergency">Emergency</button>
+          <button class="notif-tab" data-filter="warning">Warning</button>
+          <button class="notif-tab" data-filter="system">System</button>
+        </div>
+        <div class="dash-panel">
+          <div class="notif-list" id="notif-list">
+            <div class="notif-empty">No notifications yet. System is monitoring.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════════════════════════════════
+           PAGE 9: SETTINGS
+      ════════════════════════════════════ -->
+      <section class="page" id="page-settings">
+        <div class="page-header-bar">
+          <h1 class="page-h1">Settings</h1>
+          <p class="page-desc">System configuration and calibration</p>
+        </div>
+        <div class="settings-grid">
+
+          <!-- Server Connection -->
+          <div class="dash-panel">
+            <div class="panel-header"><h2 class="panel-title">Server Connection (WebSocket)</h2></div>
+            <p class="config-hint">Configure local IP address of your StampedeShield Laptop Server:</p>
+            <div class="slider-item" style="margin-bottom:1rem">
+              <label>Server IP Address:</label>
+              <div class="input-group">
+                <input type="text" id="server-ip-input" value="localhost" placeholder="localhost or 192.168.x.x">
+                <button id="btn-save-ip" class="action-button">Save &amp; Connect</button>
+              </div>
+            </div>
+            
+            <div id="section-backend-port" style="margin-top:1rem">
+              <p class="config-hint">Select Backend Hardware Arduino Serial Port:</p>
+              <div class="input-group">
+                <select id="backend-port-select" style="flex:1;padding:0.5rem;border-radius:4px;border:1px solid var(--border-medium);background:white;font-family:inherit;font-size:0.85rem;">
+                  <option value="">Auto-Detecting...</option>
+                </select>
+                <button id="btn-apply-backend-port" class="action-button secondary">Apply Port</button>
+              </div>
+              <div class="serial-info" id="backend-serial-details">Port: Auto-Detecting</div>
+            </div>
+          </div>
+
+          <!-- Tuning & Alerts -->
+          <div class="dash-panel">
+            <div class="panel-header"><h2 class="panel-title">Tuning &amp; Alert Directives</h2></div>
+            
+            <div class="slider-item" style="margin-bottom:0.8rem">
+              <label>Risk Threshold: <span id="cfg-threshold-lbl">70</span>%</label>
+              <input type="range" id="cfg-risk-threshold" min="30" max="95" value="70">
+            </div>
+
+            <div class="slider-item" style="margin-bottom:0.8rem">
+              <label>Heatmap Sensitivity: <span id="cfg-heat-sens-lbl">1.0</span>x</label>
+              <input type="range" id="cfg-heat-sens" min="0.5" max="3.0" step="0.1" value="1.0">
+            </div>
+
+            <div style="display:flex; flex-direction:column; gap:0.6rem; margin-top:1rem;">
+              <label style="display:flex; align-items:center; gap:0.5rem; font-size:0.85rem; cursor:pointer;">
+                <input type="checkbox" id="cfg-alarm-toggle" checked style="width:16px; height:16px;">
+                <span>Sound Audible Sirens / Alarms</span>
+              </label>
+              <label style="display:flex; align-items:center; gap:0.5rem; font-size:0.85rem; cursor:pointer;">
+                <input type="checkbox" id="cfg-phone-alert-toggle" checked style="width:16px; height:16px;">
+                <span>Broadcast Warning push alerts to Mobile Devices</span>
+              </label>
+              <label style="display:flex; align-items:center; gap:0.5rem; font-size:0.85rem; cursor:pointer;">
+                <input type="checkbox" id="cfg-offline-toggle" checked style="width:16px; height:16px;">
+                <span>Strict Offline Hotspot Mode</span>
+              </label>
+            </div>
+
+            <div style="margin-top:1.5rem; display:flex; gap:0.5rem;">
+              <button id="btn-export-csv-logs" class="action-button" style="flex:1;">Export CSV Log</button>
+              <button id="btn-export-json-logs" class="action-button secondary" style="flex:1;">Export JSON Log</button>
+            </div>
+          </div>
+
+          <!-- Simulator Controls -->
+          <div class="dash-panel" id="section-simulator-controls">
+            <div class="panel-header"><h2 class="panel-title">Simulator Control</h2></div>
+            <p class="config-hint">Simulate crowd scenarios for testing and demonstration:</p>
+            <div class="preset-buttons">
+              <button class="preset-btn active" data-preset="normal"><strong>Normal</strong><span>Minor fluctuations</span></button>
+              <button class="preset-btn" data-preset="drift"><strong>Process Drift</strong><span>Slow increase</span></button>
+              <button class="preset-btn" data-preset="panic"><strong>Sudden Panic</strong><span>Fast localized spike</span></button>
+              <button class="preset-btn" data-preset="stampede"><strong>Stampede Risk</strong><span>Sustained high load</span></button>
+            </div>
+            <div class="manual-sim-sliders">
+              <h5>Manual Sensor Overrides</h5>
+              <div class="slider-item"><label>F1 (Top L): <span id="sim-lbl-f1">100</span> N</label><input type="range" id="sim-slider-f1" min="0" max="1023" value="100"></div>
+              <div class="slider-item"><label>F2 (Top C): <span id="sim-lbl-f2">100</span> N</label><input type="range" id="sim-slider-f2" min="0" max="1023" value="100"></div>
+              <div class="slider-item"><label>F3 (Top R): <span id="sim-lbl-f3">100</span> N</label><input type="range" id="sim-slider-f3" min="0" max="1023" value="100"></div>
+              <div class="slider-item"><label>F4 (Bot L): <span id="sim-lbl-f4">100</span> N</label><input type="range" id="sim-slider-f4" min="0" max="1023" value="100"></div>
+              <div class="slider-item"><label>F5 (Bot C): <span id="sim-lbl-f5">100</span> N</label><input type="range" id="sim-slider-f5" min="0" max="1023" value="100"></div>
+              <div class="slider-item"><label>F6 (Bot R): <span id="sim-lbl-f6">100</span> N</label><input type="range" id="sim-slider-f6" min="0" max="1023" value="100"></div>
+            </div>
+          </div>
+
+          <!-- Hardware Calibration -->
+          <div class="dash-panel">
+            <div class="panel-header"><h2 class="panel-title">Hardware Calibration</h2></div>
+            <p class="config-hint">Scale physical sensor readings if hardware outputs low values:</p>
+            <div class="slider-item">
+              <label>Sensor Gain Factor: <span id="cfg-gain-lbl">1.0</span>x</label>
+              <input type="range" id="cfg-sensor-gain" min="1.0" max="8.0" step="0.1" value="1.0">
+            </div>
+          </div>
+
+          <!-- SPC Tuning -->
+          <div class="dash-panel">
+            <div class="panel-header"><h2 class="panel-title">SPC Sensitivity Tuning</h2></div>
+            <div class="slider-item">
+              <label>Baseline Avg (Offset): <span id="spc-offset-lbl">100</span> N</label>
+              <input type="range" id="cfg-spc-offset" min="20" max="300" value="100">
+            </div>
+            <div class="slider-item">
+              <label>Baseline Deviation (σ): <span id="spc-sigma-lbl">20</span> N</label>
+              <input type="range" id="cfg-spc-sigma" min="5" max="80" value="20">
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </div><!-- end page-outlet -->
+  </div><!-- end main-content -->
+
+  <!-- Hidden settings drawer (kept for app.js compatibility) -->
+  <aside class="settings-drawer" id="settings-drawer" style="display:none">
+    <button id="close-settings-btn" style="display:none"></button>
+    <button id="toggle-settings-btn" style="display:none"></button>
+  </aside>
+
+</div><!-- end app-shell -->
+
+<script src="spc.js"></script>
+<script src="serial.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

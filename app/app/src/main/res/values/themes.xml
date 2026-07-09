@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base application theme. -->
+    <style name="Theme.StampedeShieldMobile" parent="android:Theme.Material.NoActionBar">
+        <!-- Theme customizations can be defined here -->
+    </style>
+</resources>

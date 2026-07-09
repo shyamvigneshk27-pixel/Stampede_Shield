@@ -1,0 +1,13 @@
+{
+  "name": "stampedeshield-server",
+  "version": "1.0.0",
+  "description": "StampedeShield - Local Development Server with WebSockets and Serial Connection",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "ws": "^8.18.0",
+    "serialport": "^12.0.0"
+  }
+}
