@@ -1,0 +1,9 @@
+StampedeShield LSTM — Training Report
+=============================================
+Best overall val accuracy : 90.61%
+
+Per-class validation accuracy:
+  SAFE: 27/44 = 61.4%
+  WATCH: 9/63 = 14.3%
+  HIGH: 142/428 = 33.2%
+  CRITICAL: 3655/3812 = 95.9%

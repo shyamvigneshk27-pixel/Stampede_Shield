@@ -1,0 +1,14 @@
+# app.yaml — StampedeShield Arduino App Lab configuration
+
+name: STAMPEDESHIELD
+icon: 🛡️
+
+# Network:
+#   main.py opens an outbound UDP socket to the PC at UDP_IP:4210
+#   to forward sensor readings to the Node.js server.
+#   Outbound UDP does NOT need an inbound port listed here.
+#   Make sure the PC's firewall allows inbound UDP on port 4210.
+ports: []
+
+# No bricks required
+bricks: []

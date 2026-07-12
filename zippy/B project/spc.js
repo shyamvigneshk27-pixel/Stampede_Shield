@@ -9,8 +9,8 @@ class SPCEngine {
     this.meanHistory = []; // Array of numbers: [ average_t1, average_t2, ... ]
     
     // User-adjustable baseline settings (can be tuned via UI)
-    this.baselineMean = 100;
-    this.baselineSigma = 20;
+    this.baselineMean = 10;
+    this.baselineSigma = 2;
     
     // Tracking persistence of elevated pressure (in number of consecutive samples)
     this.elevatedSamplesCount = 0;

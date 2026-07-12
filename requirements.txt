@@ -1,0 +1,31 @@
+# StampedeShield Python Backend — Requirements
+# Install with: pip install -r requirements.txt
+
+# ── FastAPI + ASGI server ─────────────────────────────────────────────────────
+fastapi>=0.111.0
+uvicorn[standard]>=0.29.0
+pydantic>=2.0
+
+# ── Data & ML ────────────────────────────────────────────────────────────────
+numpy>=1.26.0
+pandas>=2.2.0
+
+# ── PyTorch (CPU-only for training) ──────────────────────────────────────────
+# If you already have PyTorch installed, skip this line.
+torch>=2.2.0
+
+# ── ONNX export from PyTorch ──────────────────────────────────────────────────
+onnx>=1.16.0
+
+# ── ONNX Runtime — choose ONE of the following:
+# Option A: CPU only (always works)
+onnxruntime>=1.18.0
+#
+# Option B: QNN / Snapdragon NPU  (install instead of plain onnxruntime)
+# pip install onnxruntime-qnn
+#
+# Option C: GPU (CUDA)
+# pip install onnxruntime-gpu
+
+# ── WebSocket bridge (stampede_shield/ml_bridge.py) ─────────────────────────
+websockets>=12.0
