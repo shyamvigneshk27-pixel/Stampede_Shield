@@ -22,14 +22,19 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun HeatmapView(
     sensorValues: List<Int>,
+    normalizedLoads: List<Float> = emptyList(),
     modifier: Modifier = Modifier
 ) {
     val values = if (sensorValues.size >= 6) sensorValues else listOf(0, 0, 0, 0, 0, 0)
+    // Use pre-computed normalized loads if provided, else fallback to raw/1023
+    val sensorMax = listOf(515f, 1023f, 575f, 630f, 570f, 210f)
+    val norms = if (normalizedLoads.size >= 6) normalizedLoads
+                else values.mapIndexed { i, v -> (v.toFloat() / sensorMax[i]).coerceIn(0f, 1f) }
 
-    // Animate values for smooth color transitions
+    // Animate normalized loads for smooth color transitions
     val animatedSensors = List(6) { index ->
         animateFloatAsState(
-            targetValue = values[index].toFloat(),
+            targetValue = norms[index],
             animationSpec = tween(durationMillis = 600, easing = LinearOutSlowInEasing),
             label = "SensorHeat_$index"
         )
@@ -96,9 +101,8 @@ fun HeatmapView(
                         }
 
                         val interpolatedValue = valueSum / weightSum
-                        
-                        // Scale 0..1023 to 0..1 intensity
-                        val intensity = (interpolatedValue / 1023f).coerceIn(0f, 1f)
+                        // Already normalized 0..1 — use directly for color
+                        val intensity = interpolatedValue.coerceIn(0f, 1f)
                         val color = getHeatColor(intensity)
 
                         drawRect(

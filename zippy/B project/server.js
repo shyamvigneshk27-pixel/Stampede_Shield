@@ -127,6 +127,7 @@ function connectMLBridge() {
       const packet = {
         type:               'telemetry_ml',
         timestamp:          new Date().toISOString(),
+        sensors:            r.smoothed_sensors ? r.smoothed_sensors.map(Math.round) : [0,0,0,0,0,0],
         status:             r.status,
         risk:               r.risk_score,
         fusionReason:       r.fusion_reason,

@@ -72,13 +72,22 @@ const Router = (() => {
   setInterval(tick, 1000);
 })();
 
+// Per-sensor maximum ADC values (measured at full pressure with 220Ω resistor)
+// Must match SENSOR_MAX in app_lab/main.py and ml/lstm_inference.py
+const SENSOR_MAX = [515, 1023, 575, 630, 570, 210];
+
+// Returns 0.0-1.0 normalized load for sensor i
+function sensorLoad(rawVal, sensorIdx) {
+  return Math.max(0, Math.min(1, rawVal / SENSOR_MAX[sensorIdx]));
+}
+
 /* ═══════════════════════════════════════════════════════
    PAGE RENDERING & STATE CONTROLLER
    ═══════════════════════════════════════════════════════ */
 const PageControllers = (() => {
-  let latestSensors = [0,0,0,0,0,0];
-  let latestAnalysis = null;
-  
+  let latestSensors  = [0,0,0,0,0,0];
+  let latestAnalysis  = null;
+
   // Buffers
   const incidentLog = [];
   const notifLog = [];
@@ -164,9 +173,9 @@ const PageControllers = (() => {
     }
   }
 
-  // Premium Heatmap Color mapping
-  function getColorForPressure(val) {
-    const t = Math.max(0, Math.min(1023, val)) / 1023;
+  // Premium Heatmap Color mapping — input: normalized load 0.0–1.0
+  function getColorForPressure(norm) {
+    const t = Math.max(0, Math.min(1, norm));
     let r, g, b;
     if (t <= 0.20) {
       const w = t / 0.20;
@@ -209,6 +218,10 @@ const PageControllers = (() => {
     const RADIUS = 5;
     const [F1,F2,F3,F4,F5,F6] = sensors;
 
+    // Normalize each sensor reading by its own physical max
+    const norms = sensors.map((v, i) => sensorLoad(v, i)); // [0..1] each
+    const [N1,N2,N3,N4,N5,N6] = norms;
+
     ctx.clearRect(0, 0, w, h);
     ctx.fillStyle = '#0B1120';
     ctx.fillRect(0, 0, w, h);
@@ -220,23 +233,23 @@ const PageControllers = (() => {
       const ny = row / (ROWS - 1);
       for (let col = 0; col < COLS; col++) {
         const nx = col / (COLS - 1);
-        let val;
+        let norm;
+        // Bilinear interpolation of normalized loads
         if (nx <= 0.5) {
           const u = nx * 2;
-          val = (1-u)*(1-ny)*F1 + u*(1-ny)*F2 + (1-u)*ny*F4 + u*ny*F5;
+          norm = (1-u)*(1-ny)*N1 + u*(1-ny)*N2 + (1-u)*ny*N4 + u*ny*N5;
         } else {
           const u = (nx - 0.5) * 2;
-          val = (1-u)*(1-ny)*F2 + u*(1-ny)*F3 + (1-u)*ny*F5 + u*ny*F6;
+          norm = (1-u)*(1-ny)*N2 + u*(1-ny)*N3 + (1-u)*ny*N5 + u*ny*N6;
         }
 
-        const [r,g,b] = getColorForPressure(val);
+        const [r,g,b] = getColorForPressure(norm);
         const x = GAP + col * (cellW + GAP);
         const y = GAP + row * (cellH + GAP);
 
         // Draw shadow glow
-        const intensity = Math.max(0, Math.min(1023, val)) / 1023;
-        ctx.shadowColor = `rgba(${r},${g},${b},${0.3 + intensity * 0.5})`;
-        ctx.shadowBlur = 6 + intensity * 10;
+        ctx.shadowColor = `rgba(${r},${g},${b},${0.3 + norm * 0.5})`;
+        ctx.shadowBlur = 6 + norm * 10;
 
         ctx.beginPath();
         ctx.roundRect(x, y, cellW, cellH, RADIUS);
@@ -245,7 +258,7 @@ const PageControllers = (() => {
 
         // Inner highlight
         const hlGrad = ctx.createLinearGradient(x, y, x + cellW * 0.5, y + cellH * 0.5);
-        hlGrad.addColorStop(0, `rgba(255,255,255,${0.18 - intensity * 0.08})`);
+        hlGrad.addColorStop(0, `rgba(255,255,255,${0.18 - norm * 0.08})`);
         hlGrad.addColorStop(1, 'rgba(255,255,255,0)');
         ctx.beginPath();
         ctx.roundRect(x, y, cellW, cellH, RADIUS);
@@ -274,27 +287,29 @@ const PageControllers = (() => {
     sensorPositions.forEach(({label, col, row}, i) => {
       const cx = GAP + col * (cellW + GAP) + cellW / 2;
       const cy = GAP + row * (cellH + GAP) + cellH / 2;
-      const val = sensors[i];
+      const val  = sensors[i];
+      const norm = norms[i];
+      const pct  = Math.round(norm * 100);
 
       ctx.fillStyle = 'rgba(0,0,0,0.45)';
       ctx.fillText(label, cx + 1, cy + 1);
-      ctx.fillStyle = val > 500 ? 'rgba(255,255,255,0.95)' : 'rgba(255,255,255,0.85)';
+      ctx.fillStyle = norm > 0.5 ? 'rgba(255,255,255,0.95)' : 'rgba(255,255,255,0.85)';
       ctx.fillText(label, cx, cy);
 
       ctx.font = `500 ${Math.max(8, Math.min(11, cellH * 0.32))}px Inter, sans-serif`;
-      ctx.fillStyle = val > 500 ? 'rgba(255,255,255,0.8)' : 'rgba(255,255,255,0.6)';
-      ctx.fillText(val + 'N', cx, cy + cellH * 0.55);
+      ctx.fillStyle = norm > 0.5 ? 'rgba(255,255,255,0.85)' : 'rgba(255,255,255,0.6)';
+      ctx.fillText(`${val} (${pct}%)`, cx, cy + cellH * 0.55);
       ctx.font = `600 ${Math.max(10, Math.min(14, cellH * 0.45))}px Inter, sans-serif`;
     });
 
     // ── SHIELD DIRECTION ARROW OVERLAY ────────────────────────────
-    // Calculate pressure movement gradient vectors
-    const dx = (F3 - F1 + F6 - F4) / 2;
-    const dy = (F4 - F1 + F5 - F2 + F6 - F3) / 3;
+    // Use normalized loads for gradient direction (physically meaningful)
+    const dx = (N3 - N1 + N6 - N4) / 2;
+    const dy = (N4 - N1 + N5 - N2 + N6 - N3) / 3;
     const magnitude = Math.sqrt(dx * dx + dy * dy);
-    
-    // Draw compression direction arrows if there is high pressure gradient (> 150 N)
-    if (magnitude > 150) {
+
+    // Draw compression direction arrows if normalized gradient > 0.15
+    if (magnitude > 0.15) {
       const cx = w / 2;
       const cy = h / 2;
       const angle = Math.atan2(dy, dx);
@@ -477,23 +492,30 @@ const PageControllers = (() => {
     const ids = ['f1','f2','f3','f4','f5','f6'];
     ids.forEach((id, i) => {
       const el = document.getElementById('hm-val-' + id);
-      if (el) el.textContent = sensors[i] + ' N';
+      const load = sensorLoad(sensors[i], i);
+      const pct  = Math.round(load * 100);
+      if (el) el.textContent = `${sensors[i]} (${pct}%)`;
     });
-    const peak = Math.max(...sensors);
-    const avg  = (sensors.reduce((a,b)=>a+b,0)/sensors.length).toFixed(0);
-    const hotIdx = sensors.indexOf(peak);
-    const hotNames = ['F1','F2','F3','F4','F5','F6'];
-    const setText = (id, v) => { const e = document.getElementById(id); if(e) e.textContent = v; };
-    setText('hm-peak', peak + ' N');
-    setText('hm-avg',  avg  + ' N');
+    // Peak load is the sensor with highest normalized load (not raw ADC)
+    const loads = sensors.map((v, i) => sensorLoad(v, i));
+    const peakLoad  = Math.max(...loads);
+    const hotIdx    = loads.indexOf(peakLoad);
+    const hotNames  = ['F1','F2','F3','F4','F5','F6'];
+    const rawPeak   = sensors[hotIdx];
+    const avgLoad   = loads.reduce((a,b)=>a+b,0) / loads.length;
+    const avgRaw    = (sensors.reduce((a,b)=>a+b,0)/sensors.length).toFixed(0);
+    const setText   = (id, v) => { const e = document.getElementById(id); if(e) e.textContent = v; };
+    setText('hm-peak',    `${rawPeak} (${Math.round(peakLoad*100)}%)`);
+    setText('hm-avg',     `${avgRaw} (${Math.round(avgLoad*100)}%)`);
     setText('hm-hotzone', hotNames[hotIdx]);
-    setText('hm-risk', peak > 700 ? 'Critical' : peak > 450 ? 'High' : peak > 200 ? 'Warning' : 'Low');
+    // Risk level based on normalized peak load
+    setText('hm-risk', peakLoad > 0.70 ? 'Critical' : peakLoad > 0.45 ? 'High' : peakLoad > 0.20 ? 'Warning' : 'Low');
   }
 
-  // AI Forecasting indicators (untouched but feeds dynamically)
+  // AI Forecasting indicators — uses real ML Bridge fusion output
   function updateAIPage(analysis) {
     if (!analysis) return;
-    const risk = (analysis.risk || 0) / 100;
+    const risk    = (analysis.risk || 0) / 100;
     const riskPct = analysis.risk || 0;
 
     const gaugeFill = document.getElementById('ai-gauge-fill');
@@ -505,57 +527,70 @@ const PageControllers = (() => {
     const setText = (id, v) => { const e = document.getElementById(id); if(e) e.textContent = v; };
     setText('ai-risk-pct', riskPct + '%');
 
+    // Status label & action — use real fusion reason if available
     let statusLabel = 'System Stable';
-    let action = 'Monitor';
-    let timeCrit = '—';
-    let confidence = '—';
-    let growthRate = 'Stable';
+    let action      = analysis.recommendedAction || 'Monitor';
+    let timeCrit    = '—';
+    let growthRate  = 'Stable';
+    let confidence  = '—';
 
-    if (analysis.status === 'CRITICAL') {
+    // LSTM confidence from mlDetail if available
+    if (analysis.mlDetail && analysis.mlDetail.confidence != null) {
+      confidence = Math.round(analysis.mlDetail.confidence * 100) + '%';
+    }
+
+    const status = analysis.crowdStatus || analysis.status || 'SAFE';
+    if (status === 'CRITICAL') {
       statusLabel = '⚠ Critical Compression Alert';
-      action = 'Evacuate Now';
-      timeCrit = '< 30 seconds';
-      confidence = '94%';
-      growthRate = 'Ramp Spike';
-    } else if (analysis.status === 'HIGH') {
+      action      = analysis.recommendedAction || 'Evacuate Now';
+      timeCrit    = '< 30 seconds';
+      growthRate  = 'Ramp Spike';
+    } else if (status === 'HIGH') {
       statusLabel = 'Elevated Pressure Grid';
-      action = 'Alert Marshals';
-      timeCrit = '~2 minutes';
-      confidence = '78%';
-      growthRate = 'Increasing';
-    } else if (analysis.status === 'WATCH') {
+      action      = analysis.recommendedAction || 'Alert Marshals';
+      timeCrit    = '~2 minutes';
+      growthRate  = 'Increasing';
+    } else if (status === 'WATCH') {
       statusLabel = 'Process Drifting';
-      action = 'Observe';
-      timeCrit = '> 5 minutes';
-      confidence = '61%';
-      growthRate = 'Slight Increase';
+      action      = analysis.recommendedAction || 'Observe';
+      timeCrit    = '> 5 minutes';
+      growthRate  = 'Slight Increase';
+    }
+
+    // EWMA slope for growth rate if available
+    if (analysis.ewmaDetail && analysis.ewmaDetail.slope != null) {
+      const slope = analysis.ewmaDetail.slope;
+      growthRate = slope > 2 ? 'Rising Fast' : slope > 0.5 ? 'Increasing' : slope < -0.5 ? 'Decreasing' : 'Stable';
     }
 
     setText('ai-status-label', statusLabel);
-    setText('ai-action', action);
+    setText('ai-action',       action);
     setText('ai-time-critical', timeCrit);
-    setText('ai-confidence', confidence);
-    setText('ai-growth-rate', growthRate);
-    setText('ai-spc-state', analysis.spcState || 'Stable');
-    setText('ai-spc-avg', (analysis.currentAvg || 0).toFixed(1) + ' N');
-    setText('ai-spc-sd',  (analysis.currentSd  || 0).toFixed(1) + ' N');
-    setText('ai-spc-ucl', analysis.controlLimits ? analysis.controlLimits.ucl.toFixed(0) + ' N' : '—');
-    setText('ai-spc-lcl', analysis.controlLimits ? analysis.controlLimits.lcl.toFixed(0) + ' N' : '—');
+    setText('ai-confidence',   confidence);
+    setText('ai-growth-rate',  growthRate);
+    setText('ai-spc-state',    analysis.spcState      || 'Stable');
+    setText('ai-spc-avg',      (analysis.currentAvg   || 0).toFixed(1) + ' N');
+    setText('ai-spc-sd',       (analysis.currentSd    || 0).toFixed(1) + ' N');
+    setText('ai-spc-ucl', analysis.controlLimits ? (analysis.controlLimits.ucl || 0).toFixed(0) + ' N' : '—');
+    setText('ai-spc-lcl', analysis.controlLimits ? (analysis.controlLimits.lcl || 0).toFixed(0) + ' N' : '—');
     setText('ai-spc-risk', riskPct + '%');
   }
+
 
   // Venue map gate colors & evacuation suggestions
   function updateVenuePage(sensors, analysis) {
     const ids = ['f1','f2','f3','f4','f5','f6'];
     ids.forEach((id,i) => {
+      const load = sensorLoad(sensors[i], i);
+      const pct  = Math.round(load * 100);
       const el = document.getElementById('venue-' + id);
-      if (el) el.textContent = sensors[i] + ' N';
-      
+      if (el) el.textContent = `${sensors[i]} (${pct}%)`;
+
       const dot = document.getElementById('map-' + id);
       if (dot) {
-        const v = sensors[i];
-        dot.style.background = v > 700 ? '#FF0000' : v > 450 ? '#FF7F00' : v > 200 ? '#FFFF00' : '#39FF14';
-        dot.style.color = (v > 200 && v <= 450) ? '#1A1A00' : '#FFFFFF';
+        // Color by normalized load
+        dot.style.background = load > 0.70 ? '#FF0000' : load > 0.45 ? '#FF7F00' : load > 0.20 ? '#FFFF00' : '#39FF14';
+        dot.style.color = (load > 0.20 && load <= 0.45) ? '#1A1A00' : '#FFFFFF';
       }
     });
 
@@ -1134,6 +1169,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Pipeline execution for incoming WebSocket data frames
   function handleIncomingTelemetry(sensors, packet) {
+    if (!packet) return;
+    
+    // Safely extract sensors array
+    if (!sensors) {
+      sensors = packet.sensors || packet.smoothedSensors;
+    }
+    if (!sensors || !Array.isArray(sensors) || sensors.length !== 6) {
+      sensors = [0, 0, 0, 0, 0, 0];
+    }
+    // Map sensors to integers
+    sensors = sensors.map(v => Math.round(Number(v) || 0));
+
     const now = new Date();
     telemetryCount++;
 
@@ -1171,37 +1218,29 @@ document.addEventListener("DOMContentLoaded", () => {
     // Render numbers in array grid overlays & sensor bar charts
     sensors.forEach((val, idx) => {
       if (valLabels[idx]) valLabels[idx].textContent = val;
-      if (rawNums[idx]) rawNums[idx].textContent = val;
-      
-      const scalePct = (val / 1023) * 100;
+      if (rawNums[idx])   rawNums[idx].textContent   = val;
+
+      const load    = sensorLoad(val, idx);
+      const scalePct = load * 100;
       if (rawBars[idx]) {
         rawBars[idx].style.width = `${scalePct}%`;
-        // set colors matching scale
-        rawBars[idx].style.backgroundColor = val > 700 ? "var(--status-risk)" : 
-                                            val > 450 ? "var(--status-orange)" : 
-                                            val > 200 ? "var(--status-watch)" : 
-                                            "var(--status-safe)";
+        rawBars[idx].style.backgroundColor =
+          load > 0.70 ? 'var(--status-risk)'   :
+          load > 0.45 ? 'var(--status-orange)' :
+          load > 0.20 ? 'var(--status-watch)'  :
+                        'var(--status-safe)';
       }
 
-      // Nodes cards transitions classes
-      const node = nodes[idx];
+      // Node card state classes based on normalized load
+      const node    = nodes[idx];
       const rawCard = rawCards[idx];
       if (node && rawCard) {
-        node.className = "sensor-node";
-        rawCard.className = "raw-card";
-        if (val > 700) {
-          node.classList.add("heat-critical");
-          rawCard.classList.add("status-critical");
-        } else if (val > 450) {
-          node.classList.add("heat-high");
-          rawCard.classList.add("status-high");
-        } else if (val > 200) {
-          node.classList.add("heat-mod");
-          rawCard.classList.add("status-mod");
-        } else {
-          node.classList.add("heat-low");
-          rawCard.classList.add("status-low");
-        }
+        node.className    = 'sensor-node';
+        rawCard.className = 'raw-card';
+        if      (load > 0.70) { node.classList.add('heat-critical'); rawCard.classList.add('status-critical'); }
+        else if (load > 0.45) { node.classList.add('heat-high');     rawCard.classList.add('status-high'); }
+        else if (load > 0.20) { node.classList.add('heat-mod');      rawCard.classList.add('status-mod'); }
+        else                  { node.classList.add('heat-low');       rawCard.classList.add('status-low'); }
       }
     });
 
@@ -1226,12 +1265,33 @@ document.addEventListener("DOMContentLoaded", () => {
     drawCrowdHeatmap(sensors);
 
     // Map properties for PageControllers compatibility
-    packet.crowdStatus = packet.status;
-    packet.crowdStatusDesc = packet.alert || 'Nominal variation limits.';
-    packet.riskScore = packet.risk;
-    packet.spatialStdDev = packet.currentSd || 0;
-    packet.spcReason = packet.alert || 'Nominal variation limits.';
-    packet.activeSensorsCount = packet.activeSensors || 6;
+    // For raw telemetry: populate basic fields, but don't overwrite ML data
+    if (packet.type !== 'telemetry_ml') {
+      packet.crowdStatus     = packet.status || 'PROCESSING';
+      packet.crowdStatusDesc = packet.alert  || 'Awaiting ML analysis...';
+      packet.riskScore       = packet.risk   || 0;
+      packet.spatialStdDev   = packet.currentSd || 0;
+      packet.spcState        = packet.spcState  || 'Pending';
+      packet.spcReason       = packet.alert     || 'Awaiting ML analysis...';
+      packet.activeSensorsCount = packet.activeSensors || 6;
+    } else {
+      // telemetry_ml: extract real fields from ML Bridge fusion result
+      packet.crowdStatus      = packet.status           || 'SAFE';
+      packet.crowdStatusDesc  = packet.fusionReason     || 'ML inference complete.';
+      packet.riskScore        = packet.risk             || 0;
+      packet.spatialStdDev    = packet.spcDetail ? (packet.spcDetail.spatial_std_dev || 0) : 0;
+      packet.spcState         = packet.spcDetail ? (packet.spcDetail.state || 'Stable') : 'Stable';
+      packet.spcReason        = packet.spcDetail ? (packet.spcDetail.reason || '') : '';
+      packet.currentAvg       = packet.spcDetail ? (packet.spcDetail.current_avg || 0) : 0;
+      packet.currentSd        = packet.spcDetail ? (packet.spcDetail.spatial_std_dev || 0) : 0;
+      packet.controlLimits    = packet.spcDetail ? (packet.spcDetail.control_limits || {ucl:0,lcl:0,cl:0}) : {ucl:0,lcl:0,cl:0};
+      packet.activeSensorsCount = packet.spcDetail ? (packet.spcDetail.sensor_violations || []).length : 0;
+      packet.alert            = packet.spcReason;
+      // Use smoothed sensors from ML Bridge for display if available
+      if (packet.smoothedSensors && packet.smoothedSensors.length === 6) {
+        sensors = packet.smoothedSensors.map(v => Math.round(v));
+      }
+    }
 
     // Forward to general page controller handlers
     PageControllers.onTelemetry(sensors, packet);

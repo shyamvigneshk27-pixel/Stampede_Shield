@@ -61,37 +61,64 @@ def _build_session(model_path: Path) -> tuple[ort.InferenceSession, str]:
     """
     Build ONNX Runtime inference session with best available provider.
     Returns (session, provider_name_used).
+
+    Provider priority:
+      1. QnnExecutionProvider  — Qualcomm Hexagon NPU (QAIRT SDK v2.48)
+                                 SDK path: C:/Users/qcwor/qairt/2.48.0.260626
+      2. CPUExecutionProvider  — ARM64 NEON-optimised fallback
     """
-    # QNN provider options — point at Qualcomm HTP (Hexagon) backend
-    qnn_options = {
-        "backend_path": r"QnnHtp.dll",   # QNN SDK must be in PATH
-        "profiling_level": "off",
-        "enable_htp_fp16_precision": "1",  # Use FP16 internally on NPU for speed
-    }
+    import warnings
 
-    provider_candidates = [
-        ("QnnExecutionProvider",  [qnn_options]),
-        ("CUDAExecutionProvider", [{}]),
-        ("CPUExecutionProvider",  [{}]),
-    ]
+    # ── QAIRT SDK — aarch64-windows-msvc (ARM64 native) ───────────────────────
+    QNN_SDK_LIB = Path(r"C:\Users\qcwor\qairt\2.48.0.260626\lib\aarch64-windows-msvc")
+    QNN_HTP_DLL = QNN_SDK_LIB / "QnnHtp.dll"
 
-    available = {p[0] for p in ort.get_all_providers()}
-
-    for name, opts in provider_candidates:
-        if name not in available and name != "CPUExecutionProvider":
-            continue
+    # Add the SDK lib folder to Windows DLL search path so ORT can load
+    # QnnHtpV73Stub.dll, QnnHtpPrepare.dll, QnnSystem.dll etc. automatically
+    if QNN_SDK_LIB.exists():
         try:
-            sess = ort.InferenceSession(
-                str(model_path),
-                providers=[name, "CPUExecutionProvider"],
-                provider_options=opts + [{}],
-            )
-            actual = sess.get_providers()[0]
-            return sess, actual
-        except Exception as exc:
-            print(f"[LSTMInference] Provider {name} failed: {exc}. Trying next…")
+            os.add_dll_directory(str(QNN_SDK_LIB))
+        except AttributeError:
+            pass  # os.add_dll_directory only available on Windows Python 3.8+
 
-    raise RuntimeError("Could not create ONNX Runtime session with any provider.")
+    # ── Try Qualcomm HTP (Hexagon NPU) ────────────────────────────────────────
+    if "QNNExecutionProvider" in ort.get_all_providers() and QNN_HTP_DLL.exists():
+        qnn_options = {
+            "backend_path":              str(QNN_HTP_DLL),
+            "profiling_level":           "off",
+            "enable_htp_fp16_precision": "1",   # FP16 on NPU for speed
+            "htp_performance_mode":      "burst",  # max NPU clock
+        }
+        try:
+            with warnings.catch_warnings():
+                warnings.simplefilter("ignore")
+                sess = ort.InferenceSession(
+                    str(model_path),
+                    providers=["QNNExecutionProvider", "CPUExecutionProvider"],
+                    provider_options=[qnn_options, {}],
+                )
+            actual = sess.get_providers()[0]
+            if actual == "QNNExecutionProvider":
+                print(f"[LSTMInference] ✅ NPU active — QNNExecutionProvider (Hexagon HTP)")
+                return sess, actual
+            else:
+                print(f"[LSTMInference] ⚠️  QNN loaded but fell back to: {actual}")
+        except Exception as exc:
+            print(f"[LSTMInference] QNN HTP failed: {exc}")
+    else:
+        if not QNN_HTP_DLL.exists():
+            print(f"[LSTMInference] QNN SDK not found at: {QNN_SDK_LIB}")
+
+    # ── CPU fallback ──────────────────────────────────────────────────────────
+    print("[LSTMInference] ℹ️  Running on CPU (ARM64 NEON-optimised).")
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        sess = ort.InferenceSession(
+            str(model_path),
+            providers=["CPUExecutionProvider"],
+        )
+    return sess, "CPUExecutionProvider"
+
 
 
 # ──────────────────────────────────────────────────────────────────────────────

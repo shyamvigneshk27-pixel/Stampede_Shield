@@ -44,9 +44,11 @@ class ConnectionRepository {
         override fun onMessageReceived(text: String) {
             try {
                 val json = org.json.JSONObject(text)
-                if (json.optString("type") == "telemetry") {
+                val type = json.optString("type", "")
+                // Accept both raw telemetry and ML-enriched telemetry_ml
+                if (type == "telemetry" || type == "telemetry_ml") {
                     val data = TelemetryData.fromJson(text)
-                    _telemetryData.value = data
+                    if (data != null) _telemetryData.value = data
                 }
             } catch (e: Exception) {
                 Log.e("ConnectionRepository", "Failed to parse telemetry: ${e.message}")
@@ -80,11 +82,16 @@ class ConnectionRepository {
         }
 
         serverUrl = url
-        Log.d("WebSocket", "Connecting...")
+        Log.d("WebSocket", "Connecting to $url")
         _connectionState.value = ConnectionState.CONNECTING
-        
+
         reconnectJob?.cancel()
         webSocketManager?.connect(url)
+        // Identify as mobile client so server tracks device type
+        repositoryScope.launch {
+            delay(500)
+            webSocketManager?.send("{\"type\":\"dashboard_init\",\"deviceId\":\"StampedeShield Mobile\"}")
+        }
     }
 
     fun disconnect() {

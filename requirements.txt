@@ -22,10 +22,10 @@ onnx>=1.16.0
 onnxruntime>=1.18.0
 #
 # Option B: QNN / Snapdragon NPU  (install instead of plain onnxruntime)
-# pip install onnxruntime-qnn
+pip install onnxruntime-qnn
 #
 # Option C: GPU (CUDA)
-# pip install onnxruntime-gpu
+pip install onnxruntime-gpu
 
 # ── WebSocket bridge (stampede_shield/ml_bridge.py) ─────────────────────────
 websockets>=12.0

@@ -1,6 +1,9 @@
-package com.stampedeshield.mobile.model
+﻿package com.stampedeshield.mobile.model
 
 import org.json.JSONObject
+
+// Per-sensor maximum ADC values — must match app_lab/main.py SENSOR_MAX
+private val SENSOR_MAX = listOf(515, 1023, 575, 630, 570, 210)
 
 data class TelemetryData(
     val timestamp: String,
@@ -8,77 +11,84 @@ data class TelemetryData(
     val risk: Int,
     val status: String,
     val spcState: String,
-    val alert: String
+    val alert: String,
+    val fusionReason: String = "",
+    val recommendedAction: String = "",
+    val lstmReady: Boolean = false,
+    val normalizedLoads: List<Float> = emptyList()
 ) {
     companion object {
-        fun fromJson(jsonStr: String): TelemetryData {
-            val json = JSONObject(jsonStr)
-            val sensorsArray = json.getJSONArray("sensors")
-            val sensorsList = mutableListOf<Int>()
-            for (i in 0 until sensorsArray.length()) {
-                sensorsList.add(sensorsArray.getInt(i))
-            }
+        fun fromJson(jsonStr: String): TelemetryData? {
+            return try {
+                val json = JSONObject(jsonStr)
+                val type = json.optString("type", "")
+                if (type != "telemetry" && type != "telemetry_ml") return null
 
-            var timestampStr = json.optString("timestamp", "")
-            if (timestampStr.isEmpty() && json.has("ts")) {
-                val ts = json.optLong("ts", 0L)
-                if (ts > 0) {
-                    val sdf = java.text.SimpleDateFormat("HH:mm:ss", java.util.Locale.getDefault())
-                    timestampStr = sdf.format(java.util.Date(ts))
-                } else {
-                    timestampStr = json.optString("ts", "")
+                val sensorsArray = json.optJSONArray("sensors") ?: return null
+                val sensorsList = mutableListOf<Int>()
+                for (i in 0 until sensorsArray.length()) sensorsList.add(sensorsArray.getInt(i))
+
+                val normLoads = sensorsList.mapIndexed { i, v ->
+                    val max = SENSOR_MAX.getOrElse(i) { 1023 }
+                    (v.toFloat() / max).coerceIn(0f, 1f)
                 }
-            }
+                val peakNorm = normLoads.maxOrNull() ?: 0f
 
-            val riskVal = if (json.has("risk")) {
-                json.getInt("risk")
-            } else if (sensorsList.isNotEmpty()) {
-                val maxVal = sensorsList.maxOrNull() ?: 0
-                ((maxVal / 1023.0) * 100).toInt().coerceIn(0, 100)
-            } else {
-                0
-            }
-
-            val statusVal = if (json.has("status")) {
-                json.getString("status")
-            } else {
-                when {
-                    riskVal >= 75 -> "CRITICAL"
-                    riskVal >= 50 -> "HIGH"
-                    riskVal >= 25 -> "WARNING"
-                    else -> "SAFE"
+                var timestampStr = json.optString("timestamp", "")
+                if (timestampStr.isEmpty()) {
+                    val ts = json.optLong("ts", 0L)
+                    if (ts > 0) {
+                        val sdf = java.text.SimpleDateFormat("HH:mm:ss", java.util.Locale.getDefault())
+                        timestampStr = sdf.format(java.util.Date(ts))
+                    }
                 }
-            }
 
-            val spcStateVal = if (json.has("spcState")) {
-                json.getString("spcState")
-            } else {
-                when {
-                    riskVal >= 75 -> "OUT_OF_CONTROL"
-                    riskVal >= 50 -> "WARNING_STATE"
-                    else -> "NORMAL"
+                val riskVal = if (json.has("risk") && !json.isNull("risk"))
+                    json.getInt("risk")
+                else (peakNorm * 100).toInt().coerceIn(0, 100)
+
+                val statusVal = json.optString("status", "").ifEmpty {
+                    when {
+                        riskVal >= 70 -> "CRITICAL"
+                        riskVal >= 45 -> "HIGH"
+                        riskVal >= 20 -> "WATCH"
+                        else          -> "SAFE"
+                    }
                 }
-            }
-
-            val alertVal = if (json.has("alert")) {
-                json.getString("alert")
-            } else {
-                when {
-                    riskVal >= 75 -> "CRITICAL: Severe crowd pressure detected!"
-                    riskVal >= 50 -> "HIGH: High crowd density observed."
-                    riskVal >= 25 -> "WARNING: Moderate crowd pressure."
-                    else -> "System Monitoring - All areas normal"
+                val spcStateVal = json.optString("spcState", "").ifEmpty {
+                    when {
+                        riskVal >= 70 -> "Out of Control"
+                        riskVal >= 45 -> "Drifting"
+                        else          -> "Stable"
+                    }
                 }
-            }
+                val fusionReason      = json.optString("fusionReason", "")
+                val recommendedAction = json.optString("recommendedAction", "")
+                val lstmReady         = json.optBoolean("lstmReady", false)
+                val alertVal = json.optString("alert", "").ifEmpty {
+                    fusionReason.ifEmpty {
+                        when {
+                            riskVal >= 70 -> "CRITICAL: Severe crowd compression detected!"
+                            riskVal >= 45 -> "HIGH: Elevated pressure — alert marshals."
+                            riskVal >= 20 -> "WATCH: Moderate crowd density — monitor."
+                            else          -> "System Monitoring — All areas nominal."
+                        }
+                    }
+                }
 
-            return TelemetryData(
-                timestamp = timestampStr,
-                sensors = sensorsList,
-                risk = riskVal,
-                status = statusVal,
-                spcState = spcStateVal,
-                alert = alertVal
-            )
+                TelemetryData(
+                    timestamp         = timestampStr,
+                    sensors           = sensorsList,
+                    risk              = riskVal,
+                    status            = statusVal,
+                    spcState          = spcStateVal,
+                    alert             = alertVal,
+                    fusionReason      = fusionReason,
+                    recommendedAction = recommendedAction,
+                    lstmReady         = lstmReady,
+                    normalizedLoads   = normLoads
+                )
+            } catch (e: Exception) { null }
         }
     }
 }

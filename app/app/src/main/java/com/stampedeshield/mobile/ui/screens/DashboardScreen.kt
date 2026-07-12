@@ -223,7 +223,7 @@ fun DashboardScreen(
                         .border(1.dp, Color(0xFFF1F5F9), RoundedCornerShape(20.dp))
                         .padding(16.dp)
                 ) {
-                    HeatmapView(sensorValues = data.sensors)
+                    HeatmapView(sensorValues = data.sensors, normalizedLoads = data.normalizedLoads)
                 }
 
                 // Sensor readings
