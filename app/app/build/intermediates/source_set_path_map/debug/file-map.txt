@@ -1,48 +1,48 @@
-com.stampedeshield.mobile.app-startup-runtime-1.1.1-0 C:\Users\SHYAM VIGNESH K\.gradle\caches\transforms-3\0095671cf0de38f4511901b8a19cba12\transformed\startup-runtime-1.1.1\res
-com.stampedeshield.mobile.app-ui-text-release-1 C:\Users\SHYAM VIGNESH K\.gradle\caches\transforms-3\099abca63f916589f1f36454cdb304bd\transformed\ui-text-release\res
-com.stampedeshield.mobile.app-foundation-layout-release-2 C:\Users\SHYAM VIGNESH K\.gradle\caches\transforms-3\0bccc6e03aab24f3b63f354e58cbcb78\transformed\foundation-layout-release\res
-com.stampedeshield.mobile.app-runtime-saveable-release-3 C:\Users\SHYAM VIGNESH K\.gradle\caches\transforms-3\0e02e925b176b94e4034ea8f140c3fbd\transformed\runtime-saveable-release\res
-com.stampedeshield.mobile.app-ui-util-release-4 C:\Users\SHYAM VIGNESH K\.gradle\caches\transforms-3\0f3119eaa4ca449e186af6246cff6586\transformed\ui-util-release\res
-com.stampedeshield.mobile.app-animation-core-release-5 C:\Users\SHYAM VIGNESH K\.gradle\caches\transforms-3\1229c3d4ecc139e43140fe1dc79df2f7\transformed\animation-core-release\res
-com.stampedeshield.mobile.app-ui-release-6 C:\Users\SHYAM VIGNESH K\.gradle\caches\transforms-3\1e5217f13c0d934b55006121b3e4cfac\transformed\ui-release\res
-com.stampedeshield.mobile.app-lifecycle-viewmodel-compose-2.7.0-7 C:\Users\SHYAM VIGNESH K\.gradle\caches\transforms-3\34bdf244f772de83ac0c3df13538dffc\transformed\lifecycle-viewmodel-compose-2.7.0\res
-com.stampedeshield.mobile.app-activity-ktx-1.8.2-8 C:\Users\SHYAM VIGNESH K\.gradle\caches\transforms-3\3bc9630e929335af028a436113cbd948\transformed\activity-ktx-1.8.2\res
-com.stampedeshield.mobile.app-core-ktx-1.12.0-9 C:\Users\SHYAM VIGNESH K\.gradle\caches\transforms-3\4100b841586b883593622faabab84925\transformed\core-ktx-1.12.0\res
-com.stampedeshield.mobile.app-foundation-release-10 C:\Users\SHYAM VIGNESH K\.gradle\caches\transforms-3\4477e61e9bbc6e1c019a4ad8c9e214d3\transformed\foundation-release\res
-com.stampedeshield.mobile.app-material3-1.1.2-11 C:\Users\SHYAM VIGNESH K\.gradle\caches\transforms-3\615950591311d1f2bf970cc54ee9b88e\transformed\material3-1.1.2\res
-com.stampedeshield.mobile.app-lifecycle-runtime-2.7.0-12 C:\Users\SHYAM VIGNESH K\.gradle\caches\transforms-3\61e58967546653404389896cbc189708\transformed\lifecycle-runtime-2.7.0\res
-com.stampedeshield.mobile.app-material-ripple-release-13 C:\Users\SHYAM VIGNESH K\.gradle\caches\transforms-3\671018f627485b72c315c968c3b26f1f\transformed\material-ripple-release\res
-com.stampedeshield.mobile.app-ui-tooling-release-14 C:\Users\SHYAM VIGNESH K\.gradle\caches\transforms-3\6ba41c3d45a002c42c55ae47b58280f0\transformed\ui-tooling-release\res
-com.stampedeshield.mobile.app-material-icons-core-release-15 C:\Users\SHYAM VIGNESH K\.gradle\caches\transforms-3\7553ef17c125e95b1b79d7dcbd822588\transformed\material-icons-core-release\res
-com.stampedeshield.mobile.app-animation-release-16 C:\Users\SHYAM VIGNESH K\.gradle\caches\transforms-3\78346e63daf98eb1a84abb0c1979bd50\transformed\animation-release\res
-com.stampedeshield.mobile.app-emoji2-1.4.0-17 C:\Users\SHYAM VIGNESH K\.gradle\caches\transforms-3\794710b4d91a33740162b9a7f03c1031\transformed\emoji2-1.4.0\res
-com.stampedeshield.mobile.app-savedstate-ktx-1.2.1-18 C:\Users\SHYAM VIGNESH K\.gradle\caches\transforms-3\808bb00963c806aa5ff00e72d4f3a3ce\transformed\savedstate-ktx-1.2.1\res
-com.stampedeshield.mobile.app-core-runtime-2.2.0-19 C:\Users\SHYAM VIGNESH K\.gradle\caches\transforms-3\80fbe79fb3269821ba091f65b4c61316\transformed\core-runtime-2.2.0\res
-com.stampedeshield.mobile.app-lifecycle-viewmodel-savedstate-2.7.0-20 C:\Users\SHYAM VIGNESH K\.gradle\caches\transforms-3\84f2fc7b917d4b49b2668e62aed9912c\transformed\lifecycle-viewmodel-savedstate-2.7.0\res
-com.stampedeshield.mobile.app-core-1.12.0-21 C:\Users\SHYAM VIGNESH K\.gradle\caches\transforms-3\8775ed491970576126584cf24be3fe11\transformed\core-1.12.0\res
-com.stampedeshield.mobile.app-lifecycle-process-2.7.0-22 C:\Users\SHYAM VIGNESH K\.gradle\caches\transforms-3\8a8f6c191b4fede3476d473a789c2c4f\transformed\lifecycle-process-2.7.0\res
-com.stampedeshield.mobile.app-ui-geometry-release-23 C:\Users\SHYAM VIGNESH K\.gradle\caches\transforms-3\8b871f2cb0702f0b194e1b0a87dd23f6\transformed\ui-geometry-release\res
-com.stampedeshield.mobile.app-lifecycle-runtime-ktx-2.7.0-24 C:\Users\SHYAM VIGNESH K\.gradle\caches\transforms-3\8dea6e74a660770373c853104a004b6f\transformed\lifecycle-runtime-ktx-2.7.0\res
-com.stampedeshield.mobile.app-runtime-release-25 C:\Users\SHYAM VIGNESH K\.gradle\caches\transforms-3\905b71a0eb41db739c6e97135a86d827\transformed\runtime-release\res
-com.stampedeshield.mobile.app-profileinstaller-1.3.0-26 C:\Users\SHYAM VIGNESH K\.gradle\caches\transforms-3\90a64130ec507173f2e223ecf3b43bfc\transformed\profileinstaller-1.3.0\res
-com.stampedeshield.mobile.app-ui-tooling-data-release-27 C:\Users\SHYAM VIGNESH K\.gradle\caches\transforms-3\a22c84e7f8dd8f07f185a25bf16a47a3\transformed\ui-tooling-data-release\res
-com.stampedeshield.mobile.app-lifecycle-viewmodel-2.7.0-28 C:\Users\SHYAM VIGNESH K\.gradle\caches\transforms-3\b4d4effe07c1ad8688e6ec3188e43236\transformed\lifecycle-viewmodel-2.7.0\res
-com.stampedeshield.mobile.app-customview-poolingcontainer-1.0.0-29 C:\Users\SHYAM VIGNESH K\.gradle\caches\transforms-3\b4d7fa254923c64809b4bdca41e9329a\transformed\customview-poolingcontainer-1.0.0\res
-com.stampedeshield.mobile.app-annotation-experimental-1.3.0-30 C:\Users\SHYAM VIGNESH K\.gradle\caches\transforms-3\b6969b885f09bf3f5199f4ae0019017e\transformed\annotation-experimental-1.3.0\res
-com.stampedeshield.mobile.app-activity-compose-1.8.2-31 C:\Users\SHYAM VIGNESH K\.gradle\caches\transforms-3\b6d0bb3c54fdc89ab76b9d0b3946b622\transformed\activity-compose-1.8.2\res
-com.stampedeshield.mobile.app-activity-1.8.2-32 C:\Users\SHYAM VIGNESH K\.gradle\caches\transforms-3\c7293abbe6190b929f6ae203d8b29de0\transformed\activity-1.8.2\res
-com.stampedeshield.mobile.app-ui-unit-release-33 C:\Users\SHYAM VIGNESH K\.gradle\caches\transforms-3\cf49c3a26b1937a91bbb477a31f932c6\transformed\ui-unit-release\res
-com.stampedeshield.mobile.app-ui-graphics-release-34 C:\Users\SHYAM VIGNESH K\.gradle\caches\transforms-3\d1124cdcb80346363938958f3368ace9\transformed\ui-graphics-release\res
-com.stampedeshield.mobile.app-ui-tooling-preview-release-35 C:\Users\SHYAM VIGNESH K\.gradle\caches\transforms-3\d34865ab75751a901d834d721f622b6c\transformed\ui-tooling-preview-release\res
-com.stampedeshield.mobile.app-ui-test-manifest-1.5.4-36 C:\Users\SHYAM VIGNESH K\.gradle\caches\transforms-3\d597769ea688e4e353f72a7595d30772\transformed\ui-test-manifest-1.5.4\res
-com.stampedeshield.mobile.app-lifecycle-viewmodel-ktx-2.7.0-37 C:\Users\SHYAM VIGNESH K\.gradle\caches\transforms-3\e7602a0449034be21170680041546e2f\transformed\lifecycle-viewmodel-ktx-2.7.0\res
-com.stampedeshield.mobile.app-savedstate-1.2.1-38 C:\Users\SHYAM VIGNESH K\.gradle\caches\transforms-3\ed7d6aa29ffbd7b2b662e1a9828c2e3b\transformed\savedstate-1.2.1\res
-com.stampedeshield.mobile.app-lifecycle-livedata-core-2.7.0-39 C:\Users\SHYAM VIGNESH K\.gradle\caches\transforms-3\f14687e57a5ea58578d5d30fba7c8a8b\transformed\lifecycle-livedata-core-2.7.0\res
-com.stampedeshield.mobile.app-material-release-40 C:\Users\SHYAM VIGNESH K\.gradle\caches\transforms-3\f782bf136d0c121b23da9b7e5b69b1f9\transformed\material-release\res
-com.stampedeshield.mobile.app-lifecycle-runtime-compose-2.7.0-41 C:\Users\SHYAM VIGNESH K\.gradle\caches\transforms-3\fff0549e22b814b22fc4130760adc84c\transformed\lifecycle-runtime-compose-2.7.0\res
-com.stampedeshield.mobile.app-resValues-42 C:\Users\SHYAM VIGNESH K\Downloads\a project\a project\app\app\build\generated\res\resValues\debug
-com.stampedeshield.mobile.app-packageDebugResources-43 C:\Users\SHYAM VIGNESH K\Downloads\a project\a project\app\app\build\intermediates\incremental\debug\packageDebugResources\merged.dir
-com.stampedeshield.mobile.app-packageDebugResources-44 C:\Users\SHYAM VIGNESH K\Downloads\a project\a project\app\app\build\intermediates\incremental\debug\packageDebugResources\stripped.dir
-com.stampedeshield.mobile.app-merged_res-45 C:\Users\SHYAM VIGNESH K\Downloads\a project\a project\app\app\build\intermediates\merged_res\debug
-com.stampedeshield.mobile.app-debug-46 C:\Users\SHYAM VIGNESH K\Downloads\a project\a project\app\app\src\debug\res
-com.stampedeshield.mobile.app-main-47 C:\Users\SHYAM VIGNESH K\Downloads\a project\a project\app\app\src\main\res
+com.stampedeshield.mobile.app-startup-runtime-1.1.1-0 C:\Users\qcwor\.gradle\caches\transforms-3\0095671cf0de38f4511901b8a19cba12\transformed\startup-runtime-1.1.1\res
+com.stampedeshield.mobile.app-ui-text-release-1 C:\Users\qcwor\.gradle\caches\transforms-3\099abca63f916589f1f36454cdb304bd\transformed\ui-text-release\res
+com.stampedeshield.mobile.app-foundation-layout-release-2 C:\Users\qcwor\.gradle\caches\transforms-3\0bccc6e03aab24f3b63f354e58cbcb78\transformed\foundation-layout-release\res
+com.stampedeshield.mobile.app-runtime-saveable-release-3 C:\Users\qcwor\.gradle\caches\transforms-3\0e02e925b176b94e4034ea8f140c3fbd\transformed\runtime-saveable-release\res
+com.stampedeshield.mobile.app-ui-util-release-4 C:\Users\qcwor\.gradle\caches\transforms-3\0f3119eaa4ca449e186af6246cff6586\transformed\ui-util-release\res
+com.stampedeshield.mobile.app-animation-core-release-5 C:\Users\qcwor\.gradle\caches\transforms-3\1229c3d4ecc139e43140fe1dc79df2f7\transformed\animation-core-release\res
+com.stampedeshield.mobile.app-ui-release-6 C:\Users\qcwor\.gradle\caches\transforms-3\1e5217f13c0d934b55006121b3e4cfac\transformed\ui-release\res
+com.stampedeshield.mobile.app-lifecycle-viewmodel-compose-2.7.0-7 C:\Users\qcwor\.gradle\caches\transforms-3\34bdf244f772de83ac0c3df13538dffc\transformed\lifecycle-viewmodel-compose-2.7.0\res
+com.stampedeshield.mobile.app-activity-ktx-1.8.2-8 C:\Users\qcwor\.gradle\caches\transforms-3\3bc9630e929335af028a436113cbd948\transformed\activity-ktx-1.8.2\res
+com.stampedeshield.mobile.app-core-ktx-1.12.0-9 C:\Users\qcwor\.gradle\caches\transforms-3\4100b841586b883593622faabab84925\transformed\core-ktx-1.12.0\res
+com.stampedeshield.mobile.app-foundation-release-10 C:\Users\qcwor\.gradle\caches\transforms-3\4477e61e9bbc6e1c019a4ad8c9e214d3\transformed\foundation-release\res
+com.stampedeshield.mobile.app-material3-1.1.2-11 C:\Users\qcwor\.gradle\caches\transforms-3\615950591311d1f2bf970cc54ee9b88e\transformed\material3-1.1.2\res
+com.stampedeshield.mobile.app-lifecycle-runtime-2.7.0-12 C:\Users\qcwor\.gradle\caches\transforms-3\61e58967546653404389896cbc189708\transformed\lifecycle-runtime-2.7.0\res
+com.stampedeshield.mobile.app-material-ripple-release-13 C:\Users\qcwor\.gradle\caches\transforms-3\671018f627485b72c315c968c3b26f1f\transformed\material-ripple-release\res
+com.stampedeshield.mobile.app-ui-tooling-release-14 C:\Users\qcwor\.gradle\caches\transforms-3\6ba41c3d45a002c42c55ae47b58280f0\transformed\ui-tooling-release\res
+com.stampedeshield.mobile.app-material-icons-core-release-15 C:\Users\qcwor\.gradle\caches\transforms-3\7553ef17c125e95b1b79d7dcbd822588\transformed\material-icons-core-release\res
+com.stampedeshield.mobile.app-animation-release-16 C:\Users\qcwor\.gradle\caches\transforms-3\78346e63daf98eb1a84abb0c1979bd50\transformed\animation-release\res
+com.stampedeshield.mobile.app-emoji2-1.4.0-17 C:\Users\qcwor\.gradle\caches\transforms-3\794710b4d91a33740162b9a7f03c1031\transformed\emoji2-1.4.0\res
+com.stampedeshield.mobile.app-savedstate-ktx-1.2.1-18 C:\Users\qcwor\.gradle\caches\transforms-3\808bb00963c806aa5ff00e72d4f3a3ce\transformed\savedstate-ktx-1.2.1\res
+com.stampedeshield.mobile.app-core-runtime-2.2.0-19 C:\Users\qcwor\.gradle\caches\transforms-3\80fbe79fb3269821ba091f65b4c61316\transformed\core-runtime-2.2.0\res
+com.stampedeshield.mobile.app-lifecycle-viewmodel-savedstate-2.7.0-20 C:\Users\qcwor\.gradle\caches\transforms-3\84f2fc7b917d4b49b2668e62aed9912c\transformed\lifecycle-viewmodel-savedstate-2.7.0\res
+com.stampedeshield.mobile.app-core-1.12.0-21 C:\Users\qcwor\.gradle\caches\transforms-3\8775ed491970576126584cf24be3fe11\transformed\core-1.12.0\res
+com.stampedeshield.mobile.app-lifecycle-process-2.7.0-22 C:\Users\qcwor\.gradle\caches\transforms-3\8a8f6c191b4fede3476d473a789c2c4f\transformed\lifecycle-process-2.7.0\res
+com.stampedeshield.mobile.app-ui-geometry-release-23 C:\Users\qcwor\.gradle\caches\transforms-3\8b871f2cb0702f0b194e1b0a87dd23f6\transformed\ui-geometry-release\res
+com.stampedeshield.mobile.app-lifecycle-runtime-ktx-2.7.0-24 C:\Users\qcwor\.gradle\caches\transforms-3\8dea6e74a660770373c853104a004b6f\transformed\lifecycle-runtime-ktx-2.7.0\res
+com.stampedeshield.mobile.app-runtime-release-25 C:\Users\qcwor\.gradle\caches\transforms-3\905b71a0eb41db739c6e97135a86d827\transformed\runtime-release\res
+com.stampedeshield.mobile.app-profileinstaller-1.3.0-26 C:\Users\qcwor\.gradle\caches\transforms-3\90a64130ec507173f2e223ecf3b43bfc\transformed\profileinstaller-1.3.0\res
+com.stampedeshield.mobile.app-ui-tooling-data-release-27 C:\Users\qcwor\.gradle\caches\transforms-3\a22c84e7f8dd8f07f185a25bf16a47a3\transformed\ui-tooling-data-release\res
+com.stampedeshield.mobile.app-lifecycle-viewmodel-2.7.0-28 C:\Users\qcwor\.gradle\caches\transforms-3\b4d4effe07c1ad8688e6ec3188e43236\transformed\lifecycle-viewmodel-2.7.0\res
+com.stampedeshield.mobile.app-customview-poolingcontainer-1.0.0-29 C:\Users\qcwor\.gradle\caches\transforms-3\b4d7fa254923c64809b4bdca41e9329a\transformed\customview-poolingcontainer-1.0.0\res
+com.stampedeshield.mobile.app-annotation-experimental-1.3.0-30 C:\Users\qcwor\.gradle\caches\transforms-3\b6969b885f09bf3f5199f4ae0019017e\transformed\annotation-experimental-1.3.0\res
+com.stampedeshield.mobile.app-activity-compose-1.8.2-31 C:\Users\qcwor\.gradle\caches\transforms-3\b6d0bb3c54fdc89ab76b9d0b3946b622\transformed\activity-compose-1.8.2\res
+com.stampedeshield.mobile.app-activity-1.8.2-32 C:\Users\qcwor\.gradle\caches\transforms-3\c7293abbe6190b929f6ae203d8b29de0\transformed\activity-1.8.2\res
+com.stampedeshield.mobile.app-ui-unit-release-33 C:\Users\qcwor\.gradle\caches\transforms-3\cf49c3a26b1937a91bbb477a31f932c6\transformed\ui-unit-release\res
+com.stampedeshield.mobile.app-ui-graphics-release-34 C:\Users\qcwor\.gradle\caches\transforms-3\d1124cdcb80346363938958f3368ace9\transformed\ui-graphics-release\res
+com.stampedeshield.mobile.app-ui-tooling-preview-release-35 C:\Users\qcwor\.gradle\caches\transforms-3\d34865ab75751a901d834d721f622b6c\transformed\ui-tooling-preview-release\res
+com.stampedeshield.mobile.app-ui-test-manifest-1.5.4-36 C:\Users\qcwor\.gradle\caches\transforms-3\d597769ea688e4e353f72a7595d30772\transformed\ui-test-manifest-1.5.4\res
+com.stampedeshield.mobile.app-lifecycle-viewmodel-ktx-2.7.0-37 C:\Users\qcwor\.gradle\caches\transforms-3\e7602a0449034be21170680041546e2f\transformed\lifecycle-viewmodel-ktx-2.7.0\res
+com.stampedeshield.mobile.app-savedstate-1.2.1-38 C:\Users\qcwor\.gradle\caches\transforms-3\ed7d6aa29ffbd7b2b662e1a9828c2e3b\transformed\savedstate-1.2.1\res
+com.stampedeshield.mobile.app-lifecycle-livedata-core-2.7.0-39 C:\Users\qcwor\.gradle\caches\transforms-3\f14687e57a5ea58578d5d30fba7c8a8b\transformed\lifecycle-livedata-core-2.7.0\res
+com.stampedeshield.mobile.app-material-release-40 C:\Users\qcwor\.gradle\caches\transforms-3\f782bf136d0c121b23da9b7e5b69b1f9\transformed\material-release\res
+com.stampedeshield.mobile.app-lifecycle-runtime-compose-2.7.0-41 C:\Users\qcwor\.gradle\caches\transforms-3\fff0549e22b814b22fc4130760adc84c\transformed\lifecycle-runtime-compose-2.7.0\res
+com.stampedeshield.mobile.app-resValues-42 C:\Users\qcwor\Working-Project\app\app\build\generated\res\resValues\debug
+com.stampedeshield.mobile.app-packageDebugResources-43 C:\Users\qcwor\Working-Project\app\app\build\intermediates\incremental\debug\packageDebugResources\merged.dir
+com.stampedeshield.mobile.app-packageDebugResources-44 C:\Users\qcwor\Working-Project\app\app\build\intermediates\incremental\debug\packageDebugResources\stripped.dir
+com.stampedeshield.mobile.app-merged_res-45 C:\Users\qcwor\Working-Project\app\app\build\intermediates\merged_res\debug
+com.stampedeshield.mobile.app-debug-46 C:\Users\qcwor\Working-Project\app\app\src\debug\res
+com.stampedeshield.mobile.app-main-47 C:\Users\qcwor\Working-Project\app\app\src\main\res

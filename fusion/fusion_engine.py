@@ -282,6 +282,19 @@ class FusionEngine:
         else:  # "C"
             status, risk, reason = self._strategy_c(spc_r, ewma_r, cusum_r, zscore_r, ml_result)
 
+        # Override alert rules: only alert (i.e. status != SAFE) if 4 or more sensors attain their individual maximum load (>= 85%)
+        SENSOR_MAX = [515.0, 1023.0, 575.0, 630.0, 570.0, 210.0]
+        critical_count = sum(1 for i in range(6) if smoothed[i] / SENSOR_MAX[i] >= 0.85)
+        if critical_count >= 4:
+            status = "CRITICAL"
+            risk = 100
+            reason = "emergency_4_sensor_max_override"
+        else:
+            status = "SAFE"
+            avg_load = sum(min(1.0, smoothed[i] / SENSOR_MAX[i]) for i in range(6)) / 6
+            risk = int(avg_load * 100)
+            reason = "suppressed_normal_below_4_critical"
+
         # Step 4 — Count alarming algorithms (for transparency)
         alarming: list[str] = []
         if spc_r["spc_state"] != "Stable":

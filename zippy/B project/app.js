@@ -1181,6 +1181,23 @@ document.addEventListener("DOMContentLoaded", () => {
     // Map sensors to integers
     sensors = sensors.map(v => Math.round(Number(v) || 0));
 
+    // Emergency check: alert if 4 or more sensors attain their individual maximum load (>= 85%)
+    let sensorMaxCount = 0;
+    sensors.forEach((val, idx) => {
+      if (sensorLoad(val, idx) >= 0.85) {
+        sensorMaxCount++;
+      }
+    });
+    if (sensorMaxCount >= 4) {
+      packet.risk = 100;
+      packet.status = 'CRITICAL';
+      packet.alert = 'CRITICAL EMERGENCY: 4+ sensors exceeded maximum safety threshold!';
+    } else {
+      packet.risk = Math.round((sensors.reduce((acc, val, idx) => acc + sensorLoad(val, idx), 0) / 6) * 100);
+      packet.status = 'SAFE';
+      packet.alert = 'System Monitoring — All areas nominal.';
+    }
+
     const now = new Date();
     telemetryCount++;
 

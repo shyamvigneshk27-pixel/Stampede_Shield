@@ -99,10 +99,10 @@ def _build_session(model_path: Path) -> tuple[ort.InferenceSession, str]:
                 )
             actual = sess.get_providers()[0]
             if actual == "QNNExecutionProvider":
-                print(f"[LSTMInference] ✅ NPU active — QNNExecutionProvider (Hexagon HTP)")
+                print(f"[LSTMInference] NPU active - QNNExecutionProvider (Hexagon HTP)")
                 return sess, actual
             else:
-                print(f"[LSTMInference] ⚠️  QNN loaded but fell back to: {actual}")
+                print(f"[LSTMInference] QNN loaded but fell back to: {actual}")
         except Exception as exc:
             print(f"[LSTMInference] QNN HTP failed: {exc}")
     else:
@@ -110,7 +110,7 @@ def _build_session(model_path: Path) -> tuple[ort.InferenceSession, str]:
             print(f"[LSTMInference] QNN SDK not found at: {QNN_SDK_LIB}")
 
     # ── CPU fallback ──────────────────────────────────────────────────────────
-    print("[LSTMInference] ℹ️  Running on CPU (ARM64 NEON-optimised).")
+    print("[LSTMInference] Running on CPU (ARM64 NEON-optimised).")
     with warnings.catch_warnings():
         warnings.simplefilter("ignore")
         sess = ort.InferenceSession(

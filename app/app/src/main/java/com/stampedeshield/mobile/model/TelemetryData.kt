@@ -1,4 +1,4 @@
-﻿package com.stampedeshield.mobile.model
+package com.stampedeshield.mobile.model
 
 import org.json.JSONObject
 
@@ -43,11 +43,14 @@ data class TelemetryData(
                     }
                 }
 
-                val riskVal = if (json.has("risk") && !json.isNull("risk"))
+                // Check if 4 or more sensors exceed maximum safety load threshold (>= 85%)
+                val criticalSensorCount = normLoads.count { it >= 0.85f }
+
+                var riskVal = if (json.has("risk") && !json.isNull("risk"))
                     json.getInt("risk")
                 else (peakNorm * 100).toInt().coerceIn(0, 100)
 
-                val statusVal = json.optString("status", "").ifEmpty {
+                var statusVal = json.optString("status", "").ifEmpty {
                     when {
                         riskVal >= 70 -> "CRITICAL"
                         riskVal >= 45 -> "HIGH"
@@ -55,7 +58,7 @@ data class TelemetryData(
                         else          -> "SAFE"
                     }
                 }
-                val spcStateVal = json.optString("spcState", "").ifEmpty {
+                var spcStateVal = json.optString("spcState", "").ifEmpty {
                     when {
                         riskVal >= 70 -> "Out of Control"
                         riskVal >= 45 -> "Drifting"
@@ -63,9 +66,9 @@ data class TelemetryData(
                     }
                 }
                 val fusionReason      = json.optString("fusionReason", "")
-                val recommendedAction = json.optString("recommendedAction", "")
+                var recommendedAction = json.optString("recommendedAction", "")
                 val lstmReady         = json.optBoolean("lstmReady", false)
-                val alertVal = json.optString("alert", "").ifEmpty {
+                var alertVal = json.optString("alert", "").ifEmpty {
                     fusionReason.ifEmpty {
                         when {
                             riskVal >= 70 -> "CRITICAL: Severe crowd compression detected!"
@@ -74,6 +77,21 @@ data class TelemetryData(
                             else          -> "System Monitoring — All areas nominal."
                         }
                     }
+                }
+
+                // Apply Emergency override if 4 or more sensors attained their max, otherwise suppress alert
+                if (criticalSensorCount >= 4) {
+                    riskVal = 100
+                    statusVal = "CRITICAL"
+                    spcStateVal = "Out of Control"
+                    alertVal = "CRITICAL EMERGENCY: 4+ sensors exceeded maximum safety threshold!"
+                    recommendedAction = "EVACUATE ZONE IMMEDIATELY"
+                } else {
+                    riskVal = (normLoads.average() * 100).toInt().coerceIn(0, 100)
+                    statusVal = "SAFE"
+                    spcStateVal = "Stable"
+                    alertVal = "System Monitoring — All areas nominal."
+                    recommendedAction = "Monitor — no action required"
                 }
 
                 TelemetryData(
